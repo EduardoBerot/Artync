@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p assets css js)",
+      "Bash(mv artync-icon.png artync-logo.png \"Logo Artync Nova.png\" assets/)",
+      "Bash(mv styles.css services.css hero-light.css css/)",
+      "Bash(mv app.jsx components.jsx data.js icons.jsx tweaks-panel.jsx utils.jsx js/)",
+      "Bash(git -C \"C:/Users/Usuario/OneDrive/Documentos/Projetos VSCode/Site Artync\" ls-tree -r --name-only HEAD)"
+    ]
+  }
+}

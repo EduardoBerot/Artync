@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Artync — Sites que vendem</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Instrument+Serif:ital@0;1&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+<link rel="stylesheet" href="css/styles.css"/>
+<link rel="stylesheet" href="css/services.css"/>
+<link rel="stylesheet" href="css/hero-light.css"/>
+
+<style>
+  /* Print optimisations */
+  @page { size: A4 portrait; margin: 0; }
+
+  html, body {
+    background: #fff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide chrome that doesn't belong in a static export */
+  .scroll-progress, .fab, .exit-overlay, .nav, [class*="tweaks"] { display: none !important; }
+
+  /* Disable animations + reveal opacity */
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .timeline__step { opacity: 1 !important; transform: none !important; }
+  .timeline__rail-fill { height: 100% !important; }
+  .marquee__track { animation: none !important; transform: none !important; }
+
+  /* Force visible state for IntersectionObserver-driven elements */
+  .is-visible, .timeline__step.is-visible { opacity: 1 !important; transform: none !important; }
+
+  /* Page breaks */
+  section { break-inside: avoid; page-break-inside: avoid; }
+  .hero, .section, .fcta, .footer { break-after: page; page-break-after: page; }
+  .footer { break-after: auto; }
+
+  /* Top spacing — no sticky nav */
+  .hero { padding-top: 60px !important; min-height: auto !important; }
+  body { padding-top: 0 !important; }
+
+  /* Ensure marquee shows in two static rows */
+  .marquee {
+    -webkit-mask-image: none !important;
+            mask-image: none !important;
+    overflow: visible !important;
+  }
+  .marquee__track {
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    justify-content: center !important;
+    gap: 14px !important;
+  }
+  .tcard { width: 280px !important; }
+
+  /* Tighten huge sections so they fit on a page */
+  .section { padding: 60px 0 !important; }
+  .hero { padding-bottom: 80px !important; }
+  .fcta { padding: 80px 0 !important; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="js/data.js"></script>
+<script type="text/babel" src="js/icons.jsx"></script>
+<script type="text/babel" src="js/tweaks-panel.jsx"></script>
+<script type="text/babel" src="js/components.jsx"></script>
+<script type="text/babel" src="js/app.jsx"></script>
+
+<script type="text/babel" data-presets="env,react">
+  // Wait for fonts + JSX render, then trigger print
+  (async () => {
+    try { await document.fonts.ready; } catch (e) {}
+    // Force every reveal element to its visible state
+    const markVisible = () => {
+      document.querySelectorAll('.reveal, .timeline__step').forEach(el => el.classList.add('is-visible'));
+    };
+    // Wait long enough for Babel to compile + React to mount
+    setTimeout(() => {
+      markVisible();
+      setTimeout(() => {
+        markVisible();
+        window.print();
+      }, 800);
+    }, 1500);
+  })();
+</script>
+</body>
+</html>
