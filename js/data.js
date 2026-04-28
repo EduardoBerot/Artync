@@ -166,11 +166,11 @@ window.ARTYNC_TESTIMONIALS = [
 window.ARTYNC_FAQ = [
   {
     q: "Quanto custa um site?",
-    a: "Depende do escopo, mas eu trabalho com 3 faixas: site institucional a partir de R$ 2.800, landing page de alta conversão a partir de R$ 1.900 e sistemas web sob medida com orçamento personalizado. Toda proposta é fechada após o briefing — sem letras miúdas, sem custo escondido.",
+    a: "Depende do escopo, mas trabalhamos com 3 faixas: site institucional a partir de R$ 2.800, landing page de alta conversão a partir de R$ 1.900 e sistemas web sob medida com orçamento personalizado. Toda proposta é fechada após o briefing — sem letras miúdas, sem custo escondido.",
   },
   {
     q: "Vocês atendem minha cidade?",
-    a: "Atendo presencialmente toda a região do Vale do Taquari e Vale do Rio Pardo (Lajeado, Estrela, Arroio do Meio, Encantado, Teutônia, Santa Cruz do Sul, Vera Cruz, Venâncio Aires, Rio Pardo e cidades vizinhas). Para outras regiões, atendo 100% online — o resultado é o mesmo.",
+    a: "Atendemos presencialmente toda a região do Vale do Taquari e Vale do Rio Pardo (Lajeado, Estrela, Arroio do Meio, Encantado, Teutônia, Santa Cruz do Sul, Vera Cruz, Venâncio Aires, Rio Pardo e cidades vizinhas). Para outras regiões, atendemos 100% online — o resultado é o mesmo.",
   },
   {
     q: "O site aparece no Google?",
@@ -182,10 +182,22 @@ window.ARTYNC_FAQ = [
   },
   {
     q: "Eu consigo editar o site depois?",
-    a: "Consegue. Entrego com painel administrativo simples para você editar textos, fotos e novidades. Quando precisar de algo mais técnico, me chama no WhatsApp — atendo direto, sem fila de suporte.",
+    a: "Consegue. Entregamos com painel administrativo simples para você editar textos, fotos e novidades. Quando precisar de algo mais técnico, nos chama no WhatsApp — atendemos direto, sem fila de suporte.",
   },
   {
     q: "Por que não usar Wix ou WordPress?",
     a: "Construtores de site são ótimos para quem está começando. Mas conforme você cresce, eles travam: ficam lentos, ranqueiam mal, são difíceis de personalizar e cobram caro por extensões. Site profissional em Next.js é mais rápido, mais seguro e ranqueia melhor.",
   },
 ];
+
+window.ARTYNC_CONTACT = {
+  whatsappNumber: "5551989540502",
+  phoneDisplay: "+55 51 98954-0502",
+  email: "contato@artync.com.br",
+  whatsappUrl(cityName) {
+    const msg = cityName
+      ? `Olá! Vim pelo site da Artync e quero um orçamento para ${cityName}.`
+      : "Olá! Vim pelo site da Artync e quero um orçamento.";
+    return `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+  },
+};

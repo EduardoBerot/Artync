@@ -19,9 +19,9 @@ Landing page institucional da **Artync** (desenvolvimento web) com foco em SEO r
 Site Artync/
 ├── index.html              # Entry point principal
 ├── index-print.html        # Versão para impressão A4 (auto window.print)
+├── README.md               # Visão geral pública do projeto
 ├── CLAUDE.md               # Este arquivo
 ├── assets/                 # Imagens e logos
-│   ├── artync-icon.png
 │   ├── artync-logo.png
 │   └── Logo Artync Nova.png
 ├── css/
@@ -89,6 +89,9 @@ npx serve .
 ## Pendências / atenções
 
 - **`js/utils.jsx` é órfão**: define `ScrollProgress`, `FloatingCTA`, `ExitPopup` duplicados (versões já existem em `components.jsx`). Não é referenciado por nenhum HTML. Decidir se remove ou consolida.
-- Telefone, CNPJ e e-mail no `index.html` (JSON-LD) e `Footer` ainda são placeholders (`+55 51 0000-0000`, `00.000.000/0001-00`).
-- `og:image` aponta para `https://artync.com.br/og.png` — arquivo ainda não existe.
-- Branch atual: `master`. Branch principal para PRs: `main`.
+- Placeholders ainda em produção:
+  - Telefone `+55 51 0000-0000` em `index.html` (JSON-LD `ProfessionalService`).
+  - CNPJ `00.000.000/0001-00` em `js/components.jsx` (Footer).
+  - E-mail `contato@artync.com.br` no Footer com `href="#"` (sem `mailto:`).
+- `og:image` (referenciado pelo JSON-LD como `https://artync.com.br/og.png`) — arquivo ainda não existe em `assets/`.
+- Branch atual e principal: `main`.

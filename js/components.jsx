@@ -253,7 +253,7 @@ function Benefits() {
           <span className="section__eyebrow">Benefícios</span>
           <h2 className="section__title">Tudo que um site profissional <em>precisa ter</em>.</h2>
           <p className="section__lede">
-            Não vendo "site bonito". Vendo um ativo digital que ranqueia, carrega rápido e transforma visitante em cliente. Cada item abaixo já vem incluso.
+            Não vendemos "site bonito". Vendemos um ativo digital que ranqueia, carrega rápido e transforma visitante em cliente. Cada item abaixo já vem incluso.
           </p>
         </div>
         <div className="benefits">
@@ -400,7 +400,7 @@ function HowItWorks() {
           <span className="section__eyebrow">Como funciona</span>
           <h2 className="section__title">Do briefing ao Google em <em>4 passos</em>.</h2>
           <p className="section__lede">
-            Processo enxuto, sem reuniões intermináveis. Você sabe exatamente em que etapa estamos, com prazos firmes e check-points claros.
+            Processo enxuto, sem reuniões intermináveis. Você sabe exatamente em que etapa estamos, com prazos firmes e checkpoints claros.
           </p>
         </div>
 
@@ -555,11 +555,16 @@ function FinalCTA({ city }) {
           <p className="fcta__sub">
             Orçamento gratuito em 24h. Conversamos pelo WhatsApp, eu entendo seu negócio em {city.name} e mando uma proposta sob medida. Sem cobrança, sem compromisso.
           </p>
-          <button className="fcta__btn" onClick={() => window.dispatchEvent(new CustomEvent('open-contact'))}>
+          <a
+            className="fcta__btn"
+            href={window.ARTYNC_CONTACT.whatsappUrl(city.name)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Icon.whatsapp size={18}/>
             Quero meu orçamento agora
             <Icon.arrow size={16}/>
-          </button>
+          </a>
           <div className="fcta__assure">
             <span><Icon.check size={12}/> Resposta em até 24h</span>
             <span><Icon.shield size={12}/> Sem compromisso</span>
@@ -622,24 +627,25 @@ function Footer({ city, allCities }) {
 // ---------------------------------------
 // Floating CTA
 // ---------------------------------------
-function FloatingCTA() {
+function FloatingCTA({ city }) {
   const [bubble, setBubble] = useState(false);
   useEffect(() => {
     const t = setTimeout(() => setBubble(true), 6000);
     return () => clearTimeout(t);
   }, []);
+  const href = window.ARTYNC_CONTACT.whatsappUrl(city && city.name);
   return (
     <div className="fab">
       {bubble && (
         <div className="fab__bubble">
-          <button className="fab__close" onClick={() => setBubble(false)}><Icon.close size={10}/></button>
+          <button className="fab__close" onClick={(e) => { e.preventDefault(); e.stopPropagation(); setBubble(false); }} aria-label="Fechar"><Icon.close size={10}/></button>
           <strong>Olá! 👋</strong>
-          Posso te mandar um orçamento gratuito em até 24h.
+          Podemos te mandar um orçamento gratuito em até 24h.
         </div>
       )}
-      <button className="fab__btn" aria-label="Falar no WhatsApp" onClick={() => window.dispatchEvent(new CustomEvent('open-contact'))}>
+      <a className="fab__btn" aria-label="Falar no WhatsApp" href={href} target="_blank" rel="noopener noreferrer">
         <Icon.whatsapp size={28}/>
-      </button>
+      </a>
     </div>
   );
 }
@@ -650,6 +656,8 @@ function FloatingCTA() {
 function ExitPopup({ city }) {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [phone, setPhone] = useState('');
   const shownRef = useRef(false);
 
   useEffect(() => {
@@ -692,11 +700,55 @@ function ExitPopup({ city }) {
             <span className="exit-modal__pill">Espera aí · {city.name}</span>
             <h3 className="exit-modal__title">Antes de sair, que tal um <em>orçamento gratuito</em>?</h3>
             <p className="exit-modal__sub">
-              Deixa o WhatsApp que eu mando uma proposta em até 24h. Sem custo, sem compromisso e direto comigo.
+              Deixa o WhatsApp que a gente manda uma proposta em até 24h. Sem custo, sem compromisso e direto com a nossa equipe.
             </p>
-            <form className="exit-modal__form" onSubmit={e => { e.preventDefault(); setSubmitted(true); }}>
-              <input className="exit-modal__input" type="tel" placeholder="(51) 9 0000-0000" required/>
-              <button type="submit" className="btn btn--accent" style={{ padding: '14px 22px' }}>Enviar <Icon.arrow size={14}/></button>
+            <form className="exit-modal__form" onSubmit={async e => {
+              e.preventDefault();
+              setLoading(true);
+              try {
+                // Envia para Formspree (substitua FORMSPREE_ID pelo seu ID real)
+                const formData = {
+                  phone,
+                  city: city.name,
+                  region: city.region,
+                  source: 'exit-popup',
+                  timestamp: new Date().toISOString()
+                };
+                const response = await fetch('https://formspree.io/f/mgorjzpn', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(formData)
+                });
+                if (response.ok) {
+                  setSubmitted(true);
+                  // Opcional: abrir WhatsApp após envio
+                  // window.open(ARTYNC_CONTACT.whatsappUrl(city.name), '_blank');
+                } else {
+                  alert('Erro ao enviar. Tente novamente ou chame no WhatsApp.');
+                }
+              } catch (err) {
+                console.error('ExitPopup submit error:', err);
+                alert('Erro ao enviar. Tente novamente ou chame no WhatsApp.');
+              } finally {
+                setLoading(false);
+              }
+            }}>
+              <input
+                className="exit-modal__input"
+                type="tel"
+                placeholder="(51) 9 0000-0000"
+                value={phone}
+                onChange={e => setPhone(e.target.value)}
+                required
+              />
+              <button
+                type="submit"
+                className="btn btn--accent"
+                style={{ padding: '14px 22px' }}
+                disabled={loading}
+              >
+                {loading ? 'Enviando...' : 'Enviar'} <Icon.arrow size={14}/>
+              </button>
             </form>
             <p className="exit-modal__assure">
               <Icon.shield size={11}/> &nbsp;Seus dados ficam seguros. Não compartilhamos com ninguém.
@@ -708,7 +760,7 @@ function ExitPopup({ city }) {
               <Icon.check size={26}/>
             </div>
             <h3 className="exit-modal__title">Recebido! 🎉</h3>
-            <p className="exit-modal__sub">Em até 24h te mando uma proposta sob medida pelo WhatsApp.</p>
+            <p className="exit-modal__sub">Em até 24h enviamos uma proposta sob medida pelo WhatsApp.</p>
           </div>
         )}
       </div>

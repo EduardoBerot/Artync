@@ -56,7 +56,7 @@ function App() {
       <FinalCTA city={city}/>
       <Footer city={city} allCities={cities}/>
 
-      {tweaks.showFloatingCTA && <FloatingCTA/>}
+      {tweaks.showFloatingCTA && <FloatingCTA city={city}/>}
       {tweaks.showExitPopup && <ExitPopup city={city}/>}
 
       <TweaksPanel title="Tweaks">
