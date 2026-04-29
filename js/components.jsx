@@ -29,10 +29,16 @@ function useReveal(options = {}) {
 function ScrollProgress() {
   const [w, setW] = useState(0);
   useEffect(() => {
+    let ticking = false;
     const onScroll = () => {
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
-      setW(Math.min(100, Math.max(0, pct)));
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+        setW(Math.min(100, Math.max(0, pct)));
+        ticking = false;
+      });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -49,25 +55,42 @@ function ScrollProgress() {
 // Nav
 // ---------------------------------------
 function Nav({ city }) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 24);
+        ticking = false;
+      });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
   return (
-    <nav className="nav nav--scrolled">
-      <div className="nav__inner">
-        <a href="#top" className="nav__logo">
-          <img src="assets/artync-logo.png" alt="Artync" />
-        </a>
-        <div className="nav__links">
-          <a href="#servicos">Serviços</a>
-          <a href="#beneficios">Benefícios</a>
-          <a href="#processo">Processo</a>
-          <a href="#faq">Dúvidas</a>
-        </div>
-        <div className="nav__cta">
-          <a href="#contato" className="btn btn--accent btn--pulse" style={{ padding: '10px 18px', fontSize: 13 }}>
-            Solicitar orçamento
+    <header className="site-header">
+      <nav className={scrolled ? 'nav nav--scrolled' : 'nav'} aria-label="Principal">
+        <div className="nav__inner">
+          <a href="#top" className="nav__logo">
+            <img src="assets/artync-logo.png" alt="Artync" />
           </a>
+          <div className="nav__links">
+            <a href="#servicos">Serviços</a>
+            <a href="#beneficios">Benefícios</a>
+            <a href="#processo">Processo</a>
+            <a href="#faq">Dúvidas</a>
+          </div>
+          <div className="nav__cta">
+            <a href="#contato" className="btn btn--accent btn--pulse" style={{ padding: '10px 18px', fontSize: 13 }}>
+              Solicitar orçamento
+            </a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }
 
@@ -170,6 +193,18 @@ function Hero({ city }) {
 }
 
 // ---------------------------------------
+// Reveal wrapper component (avoids useReveal() in .map())
+// ---------------------------------------
+function Reveal({ children, className, delay }) {
+  const ref = useReveal();
+  return (
+    <div ref={ref} className={`reveal ${className || ''}${delay ? ` reveal--delay-${delay}` : ''}`}>
+      {children}
+    </div>
+  );
+}
+
+// ---------------------------------------
 // Benefits
 // ---------------------------------------
 function BVisual({ kind }) {
@@ -257,10 +292,9 @@ function Benefits() {
           </p>
         </div>
         <div className="benefits">
-          {benefits.map((b, i) => {
-            const ref = useReveal();
-            return (
-              <article key={i} ref={ref} className={`bcard reveal reveal--delay-${(i % 3) + 1}`}>
+          {benefits.map((b, i) => (
+            <Reveal key={i} delay={(i % 3) + 1}>
+              <article className="bcard">
                 <div className="bcard__visual">
                   <BVisual kind={b.visual}/>
                   <div className="bcard__shimmer"/>
@@ -269,8 +303,8 @@ function Benefits() {
                 <p className="bcard__body">{b.body}</p>
                 <div className="bcard__glow"/>
               </article>
-            );
-          })}
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -335,17 +369,16 @@ function Services() {
           </p>
         </div>
         <div className="services">
-          {SERVICES.map((s, i) => {
-            const ref = useReveal();
-            return (
-              <article key={i} ref={ref} className={`scard reveal reveal--delay-${(i % 4) + 1}`}>
+          {SERVICES.map((s, i) => (
+            <Reveal key={i} delay={(i % 4) + 1}>
+              <article className="scard">
                 <div className="scard__icon">{s.icon}</div>
                 <h3 className="scard__title">{s.title}</h3>
                 <p className="scard__body">{s.body}</p>
                 <div className="scard__glow"/>
               </article>
-            );
-          })}
+            </Reveal>
+          ))}
         </div>
         <div ref={useReveal()} className="reveal" style={{ textAlign: 'center', marginTop: 56 }}>
           <a href="#contato" className="btn btn--accent btn--pulse">
@@ -367,6 +400,7 @@ function HowItWorks() {
   const [fillPct, setFillPct] = useState(0);
 
   useEffect(() => {
+    let ticking = false;
     const update = () => {
       const rail = railRef.current;
       if (!rail) return;
@@ -378,9 +412,17 @@ function HowItWorks() {
       const progress = Math.min(1, Math.max(0, (vh * 0.7 - start) / (total + vh * 0.3)));
       setFillPct(progress * 100);
     };
-    window.addEventListener('scroll', update, { passive: true });
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    };
     update();
-    return () => window.removeEventListener('scroll', update);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
@@ -431,64 +473,6 @@ function HowItWorks() {
 }
 
 // ---------------------------------------
-// Testimonials
-// ---------------------------------------
-function Testimonials() {
-  const items = window.ARTYNC_TESTIMONIALS;
-  const row1 = items.slice(0, 4);
-  const row2 = items.slice(4);
-  return (
-    <section className="section section--ink" id="depoimentos">
-      <div className="section__inner">
-        <div ref={useReveal()} className="reveal">
-          <span className="section__eyebrow">Depoimentos</span>
-          <h2 className="section__title">Quem confia, <em>recomenda</em>.</h2>
-          <p className="section__lede">
-            Empresas reais do Vale do Taquari e Vale do Rio Pardo que viram resultado depois de profissionalizar a presença digital.
-          </p>
-        </div>
-      </div>
-      <div className="marquee">
-        <div className="marquee__track">
-          {[...row1, ...row1].map((t, i) => (
-            <article key={i} className="tcard">
-              <div className="tcard__stars">
-                {Array.from({ length: t.stars }).map((_, j) => <Icon.star key={j} size={14}/>)}
-              </div>
-              <p className="tcard__quote">"{t.quote}"</p>
-              <div className="tcard__author">
-                <div className="tcard__avatar"/>
-                <div>
-                  <div className="tcard__name">{t.name}</div>
-                  <div className="tcard__role">{t.role}</div>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-        <div className="marquee__track marquee__track--reverse">
-          {[...row2, ...row2].map((t, i) => (
-            <article key={i} className="tcard">
-              <div className="tcard__stars">
-                {Array.from({ length: t.stars }).map((_, j) => <Icon.star key={j} size={14}/>)}
-              </div>
-              <p className="tcard__quote">"{t.quote}"</p>
-              <div className="tcard__author">
-                <div className="tcard__avatar"/>
-                <div>
-                  <div className="tcard__name">{t.name}</div>
-                  <div className="tcard__role">{t.role}</div>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ---------------------------------------
 // FAQ
 // ---------------------------------------
 function FAQ({ city }) {
@@ -512,19 +496,29 @@ function FAQ({ city }) {
             E que merecem resposta direta antes de qualquer reunião.
           </p>
         </div>
-        <div className="faq">
+        <div className="faq" role="region" aria-labelledby="faq-title">
+          <h2 id="faq-title" className="visually-hidden">Dúvidas frequentes</h2>
           {faq.map((f, i) => {
             const isOpen = open === i;
+            const panelId = `faq-panel-${i}`;
             const panelRef = el => refs.current[i] = el;
             return (
               <div key={i} className={`faq__item ${isOpen ? 'faq__item--open' : ''}`}>
-                <button className="faq__btn" onClick={() => setOpen(isOpen ? -1 : i)}>
+                <button
+                  className="faq__btn"
+                  onClick={() => setOpen(isOpen ? -1 : i)}
+                  aria-expanded={isOpen}
+                  aria-controls={panelId}
+                >
                   <span>{f.q}</span>
                   <span className="faq__icon"><Icon.plus size={14}/></span>
                 </button>
                 <div
+                  id={panelId}
                   className="faq__panel"
                   ref={panelRef}
+                  role="region"
+                  aria-labelledby={`faq-btn-${i}`}
                   style={{ maxHeight: isOpen && refs.current[i] ? refs.current[i].scrollHeight + 'px' : '0px' }}
                 >
                   <div className="faq__panel-inner">{f.a}</div>
@@ -579,7 +573,7 @@ function FinalCTA({ city }) {
 // ---------------------------------------
 // Footer
 // ---------------------------------------
-function Footer({ city, allCities }) {
+function Footer() {
   return (
     <footer className="footer">
       <div className="footer__inner">
@@ -599,25 +593,20 @@ function Footer({ city, allCities }) {
           </ul>
         </div>
         <div className="footer__col">
-          <h4>Cidades</h4>
-          <ul>
-            {Object.values(allCities).slice(0, 6).map(c => (
-              <li key={c.slug}><a href={`#${c.slug}`}>{c.name}</a></li>
-            ))}
-          </ul>
-        </div>
-        <div className="footer__col">
           <h4>Contato</h4>
           <ul>
             <li><a href="#">WhatsApp</a></li>
-            <li><a href="#">contato@artync.com.br</a></li>
-            <li><a href="#">Instagram</a></li>
+            <li>
+              <a href="https://www.instagram.com/_artync/" target="_blank" rel="noopener noreferrer" className="footer__social">
+                <Icon.instagram size={14}/> @_artync
+              </a>
+            </li>
             <li><a href="#">LinkedIn</a></li>
           </ul>
         </div>
       </div>
       <div className="footer__bottom">
-        <span>© 2026 Artync. CNPJ 00.000.000/0001-00. {city.name} — {city.state}.</span>
+        <span>© 2026 Artync.</span>
         <span>Política de privacidade · Termos</span>
       </div>
     </footer>

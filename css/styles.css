@@ -99,6 +99,58 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================
+   Skip Link (Acessibilidade)
+   ============================================ */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  padding: 12px 18px;
+  background: var(--indigo-600);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+  z-index: 1000;
+  transition: top .2s;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--indigo-400);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Main landmark
+   ============================================ */
+#conteudo {
+  scroll-margin-top: 80px;
+}
+
+/* ============================================
+   Visually hidden (acessibilidade)
+   ============================================ */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================
+   Site header landmark
+   ============================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ============================================
    Nav
    ============================================ */
 .nav {
@@ -823,72 +875,6 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================
-   Testimonials marquee
-   ============================================ */
-.marquee {
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  overflow: hidden;
-  padding: 8px 0;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-.marquee__track {
-  display: flex;
-  gap: 18px;
-  width: max-content;
-  animation: marquee 50s linear infinite;
-}
-.marquee__track--reverse {
-  animation: marquee 60s linear infinite reverse;
-}
-.marquee:hover .marquee__track {
-  animation-play-state: paused;
-}
-@keyframes marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.tcard {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  padding: 24px;
-  width: 380px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.section--ink .tcard {
-  background: rgba(255,255,255,.04);
-  border-color: rgba(255,255,255,.08);
-}
-.tcard__stars {
-  display: flex; gap: 2px; color: #FBBF24;
-}
-.tcard__quote {
-  font-size: 15.5px;
-  line-height: 1.5;
-  color: var(--ink-soft);
-  flex: 1;
-}
-.section--ink .tcard__quote { color: rgba(255,255,255,.85); }
-.tcard__author {
-  display: flex; align-items: center; gap: 12px;
-}
-.tcard__avatar {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--indigo-300), var(--indigo-600));
-  flex-shrink: 0;
-}
-.tcard__name { font-weight: 600; font-size: 14px; }
-.tcard__role { font-size: 12.5px; color: var(--muted); }
-
-/* ============================================
    FAQ
    ============================================ */
 .faq {
@@ -1070,6 +1056,8 @@ a { color: inherit; text-decoration: none; }
 }
 .footer__col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
 .footer__col a:hover { color: var(--indigo-600); }
+.footer__social { display: inline-flex; align-items: center; gap: 6px; }
+.footer__social svg { flex-shrink: 0; }
 .footer__bottom {
   max-width: 1280px;
   margin: 40px auto 0;
@@ -1309,4 +1297,36 @@ a { color: inherit; text-decoration: none; }
   .timeline__node { width: 48px; height: 48px; font-size: 18px; }
   .footer__inner { grid-template-columns: 1fr; gap: 32px; }
   .footer__bottom { flex-direction: column; gap: 8px; }
+}
+
+/* ============================================
+   Print (A4 portrait) — usado por Ctrl+P e por ?print=1
+   ============================================ */
+@media print {
+  @page { size: A4 portrait; margin: 0; }
+
+  html, body {
+    background: #fff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .scroll-progress, .fab, .exit-overlay, .nav, [class*="tweaks"] { display: none !important; }
+
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal, .timeline__step { opacity: 1 !important; transform: none !important; }
+  .timeline__rail-fill { height: 100% !important; }
+  .is-visible, .timeline__step.is-visible { opacity: 1 !important; transform: none !important; }
+
+  section { break-inside: avoid; page-break-inside: avoid; }
+  .hero, .section, .fcta, .footer { break-after: page; page-break-after: page; }
+  .footer { break-after: auto; }
+
+  .hero { padding: 60px 0 80px !important; min-height: auto !important; }
+  body { padding-top: 0 !important; }
+  .section { padding: 60px 0 !important; }
+  .fcta { padding: 80px 0 !important; }
 }

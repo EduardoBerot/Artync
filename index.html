@@ -11,8 +11,11 @@
 <meta property="og:title" content="Artync — Sites que vendem"/>
 <meta property="og:description" content="Desenvolvimento web focado em conversão para empresas do Vale do Taquari e Vale do Rio Pardo."/>
 <meta property="og:locale" content="pt_BR"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<link rel="canonical" href="https://artync.com.br/lajeado"/>
+<meta property="og:url" content="https://artync.com.br/"/>
+<!-- TODO: substituir por arte 1200×630 dedicada (ex.: assets/og.png). Logo é fallback temporário. -->
+<meta property="og:image" content="https://artync.com.br/assets/artync-logo.png"/>
+<meta name="twitter:card" content="summary"/>
+<link rel="canonical" href="https://artync.com.br/"/>
 <meta name="robots" content="index, follow"/>
 
 <!-- JSON-LD ProfessionalService -->
@@ -21,7 +24,7 @@
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Artync Desenvolvimento Web",
-  "image": "https://artync.com.br/og.png",
+  "image": "https://artync.com.br/assets/artync-logo.png",
   "url": "https://artync.com.br",
   "telephone": "+55 51 98954-0502",
   "areaServed": ["Lajeado","Santa Cruz do Sul","Arroio do Meio","Estrela","Venâncio Aires","Teutônia","Encantado","Vera Cruz","Rio Pardo"],
@@ -54,14 +57,13 @@
 <body>
 <div id="root"></div>
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 
-<script src="js/data.js"></script>
-<script type="text/babel" src="js/icons.jsx"></script>
-<script type="text/babel" src="js/tweaks-panel.jsx"></script>
-<script type="text/babel" src="js/components.jsx"></script>
-<script type="text/babel" src="js/app.jsx"></script>
+<script defer src="dist/data.js"></script>
+<script defer src="dist/icons.js"></script>
+<script defer src="dist/tweaks-panel.js"></script>
+<script defer src="dist/components.js"></script>
+<script defer src="dist/app.js"></script>
 </body>
 </html>

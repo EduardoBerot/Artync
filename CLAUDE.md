@@ -4,56 +4,57 @@ Landing page institucional da **Artync** (desenvolvimento web) com foco em SEO r
 
 ## Stack
 
-- **HTML estático** servido como SPA — sem build, sem bundler, sem `package.json`.
-- **React 18.3.1** + **ReactDOM** carregados via CDN (unpkg).
-- **Babel Standalone 7.29.0** compila JSX no navegador (`type="text/babel"`).
+- **HTML estático** servido como SPA — sem framework, sem bundler de runtime.
+- **React 18.3.1 production** + **ReactDOM** carregados via CDN (unpkg).
+- **JSX pré-compilado** por `esbuild` → `dist/*.js` minificado. Nada de Babel no navegador.
 - **CSS puro** com design tokens via CSS variables (`:root` em `css/styles.css`).
 - **Google Fonts**: Inter, Fraunces, Instrument Serif, DM Serif Display, JetBrains Mono.
 - **Google Analytics** já integrado (commit `1b0b23c`).
-
-> Observação: `data.js` menciona "Next.js 14" no copy de marketing, mas o site **não** usa Next.js — é HTML estático com React via CDN.
 
 ## Estrutura de pastas
 
 ```
 Site Artync/
-├── index.html              # Entry point principal
-├── index-print.html        # Versão para impressão A4 (auto window.print)
+├── index.html              # Entry point — carrega dist/*.js. `?print=1` dispara window.print() automaticamente.
+├── package.json            # Dev dep única: esbuild (build do JSX)
+├── build.mjs               # Compila js/*.jsx → dist/*.js (minificado)
 ├── README.md               # Visão geral pública do projeto
 ├── CLAUDE.md               # Este arquivo
 ├── assets/                 # Imagens e logos
-│   ├── artync-logo.png
-│   └── Logo Artync Nova.png
 ├── css/
 │   ├── styles.css          # Tokens, reset, layout, componentes globais
 │   ├── services.css        # Estilos da seção Services
 │   └── hero-light.css      # Variante "light" do hero
-└── js/
-    ├── data.js             # window.ARTYNC_CITIES, BENEFITS, STEPS, TESTIMONIALS, FAQ
-    ├── icons.jsx           # window.Icon — set de ícones SVG inline
-    ├── tweaks-panel.jsx    # useTweaks + TweaksPanel + controles (Slider, Toggle, etc.)
-    ├── components.jsx      # window.ArtyncSite — Nav, Hero, Benefits, Services, FAQ, etc.
-    ├── app.jsx             # <App/> raiz, monta tudo via ReactDOM.createRoot
-    └── utils.jsx           # ⚠️ ÓRFÃO — não carregado pelo index.html (ver "Pendências")
+├── js/                     # ✏️ FONTE — editar aqui
+│   ├── data.js             # window.ARTYNC_CITIES, BENEFITS, STEPS, FAQ, CONTACT
+│   ├── icons.jsx           # window.Icon — set de ícones SVG inline
+│   ├── tweaks-panel.jsx    # useTweaks + TweaksPanel + controles
+│   ├── components.jsx      # window.ArtyncSite — Nav, Hero, Benefits, Services, FAQ, etc.
+│   └── app.jsx             # <App/> raiz, monta tudo via ReactDOM.createRoot
+└── dist/                   # 🛠️ ARTEFATO — gerado por `npm run build`, commitado
+    ├── data.js             # cópia de js/data.js
+    └── *.js                # JSX pré-compilado e minificado
 ```
+
+> **Workflow**: edita `js/*.jsx` → roda `npm run build` (ou `npm run watch`) → commita `dist/`.
+> O `dist/` fica versionado para que o site funcione em qualquer host estático sem build step no servidor.
 
 ## Ordem de carregamento (crítica)
 
-`index.html` carrega scripts nesta ordem — qualquer mudança quebra o site:
+`index.html` carrega scripts com `defer`, nesta ordem — qualquer mudança quebra o site:
 
-1. React + ReactDOM (CDN)
-2. Babel Standalone (CDN)
-3. `js/data.js` — popula `window.ARTYNC_*`
-4. `js/icons.jsx` — define `window.Icon`
-5. `js/tweaks-panel.jsx` — define `useTweaks`, `TweaksPanel`, controles
-6. `js/components.jsx` — define `window.ArtyncSite` (precisa de `Icon`)
-7. `js/app.jsx` — usa `ArtyncSite` + `useTweaks` + `ARTYNC_CITIES`
+1. React + ReactDOM (CDN, production min)
+2. `dist/data.js` — popula `window.ARTYNC_*`
+3. `dist/icons.js` — define `window.Icon`
+4. `dist/tweaks-panel.js` — define `useTweaks`, `TweaksPanel`, controles
+5. `dist/components.js` — define `window.ArtyncSite` (precisa de `Icon`)
+6. `dist/app.js` — usa `ArtyncSite` + `useTweaks` + `ARTYNC_CITIES`
 
-**Não há módulos ES** — tudo se comunica via `window.*`. Ao adicionar componentes novos, expor em `window` e carregar antes de quem consome.
+**Não há módulos ES** — tudo se comunica via `window.*`. Ao adicionar componentes novos, expor em `window`, carregar antes de quem consome, e adicionar a `JSX_FILES` em `build.mjs`.
 
 ## Painel de Tweaks (edit mode)
 
-`app.jsx` define `TWEAK_DEFAULTS` dentro de marcadores `/*EDITMODE-BEGIN*/...{ }.../*EDITMODE-END*/`. O host (Claude artifacts/preview) reescreve esse bloco em disco quando o usuário ajusta o painel — não remover os marcadores.
+`js/app.jsx` define `TWEAK_DEFAULTS` dentro de marcadores `/*EDITMODE-BEGIN*/...{ }.../*EDITMODE-END*/`. O host (Claude artifacts/preview) reescreve esse bloco no **source `.jsx`** quando o usuário ajusta o painel — não remover os marcadores. Após edit, é preciso rodar `npm run build` para refletir no `dist/`.
 
 Tweaks atuais: `city`, `accent` (cor), `heroStyle` (gradient/minimal/dark), `displayFont`, `showFloatingCTA`, `showExitPopup`.
 
@@ -75,20 +76,26 @@ Em produção (Next.js no spec original, não implementado aqui), cada cidade vi
 
 ## Como rodar localmente
 
-Não há servidor de dev. Abrir `index.html` direto no navegador funciona, mas para evitar problemas com `file://` e CORS de fontes/CDN:
-
 ```bash
-# qualquer servidor estático na raiz do projeto
-python -m http.server 8000
-# ou
-npx serve .
+# instalar esbuild (uma vez)
+npm install
+
+# build one-shot
+npm run build
+
+# ou build em watch (rebuild ao editar js/*)
+npm run watch
+
+# servir a raiz (em outro terminal)
+npm run serve   # python -m http.server 8000
 ```
 
-`index-print.html` dispara `window.print()` automaticamente após o React montar — usar para gerar PDF A4.
+Abrir `index.html` direto no navegador via `file://` quebra CORS das CDNs — usar o servidor.
+
+Para gerar PDF A4: acessar `http://localhost:8000/?print=1`. Após o React montar e fontes carregarem, `window.print()` dispara automaticamente. As regras de impressão (`@media print`) ficam em `css/styles.css` — funcionam em qualquer Ctrl+P.
 
 ## Pendências / atenções
 
-- **`js/utils.jsx` é órfão**: define `ScrollProgress`, `FloatingCTA`, `ExitPopup` duplicados (versões já existem em `components.jsx`). Não é referenciado por nenhum HTML. Decidir se remove ou consolida.
 - Placeholders ainda em produção:
   - Telefone `+55 51 0000-0000` em `index.html` (JSON-LD `ProfessionalService`).
   - CNPJ `00.000.000/0001-00` em `js/components.jsx` (Footer).

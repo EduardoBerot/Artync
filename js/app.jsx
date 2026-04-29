@@ -44,17 +44,35 @@ function App() {
     document.body.dataset.hero = tweaks.heroStyle;
   }, [tweaks.heroStyle]);
 
+  // Auto-print quando a URL tem ?print=1 (substitui index-print.html).
+  useEffect(() => {
+    if (new URLSearchParams(location.search).get('print') !== '1') return;
+    let cancelled = false;
+    (async () => {
+      try { await document.fonts.ready; } catch {}
+      if (cancelled) return;
+      setTimeout(() => {
+        document.querySelectorAll('.reveal, .timeline__step').forEach(el => el.classList.add('is-visible'));
+        setTimeout(() => window.print(), 400);
+      }, 600);
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
   return (
     <>
       <ScrollProgress/>
       <Nav city={city}/>
-      <Hero city={city}/>
-      <Services/>
-      <Benefits/>
-      <HowItWorks/>
-      <FAQ city={city}/>
-      <FinalCTA city={city}/>
-      <Footer city={city} allCities={cities}/>
+      <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>
+      <main id="conteudo">
+        <Hero city={city}/>
+        <Services/>
+        <Benefits/>
+        <HowItWorks/>
+        <FAQ city={city}/>
+        <FinalCTA city={city}/>
+      </main>
+      <Footer/>
 
       {tweaks.showFloatingCTA && <FloatingCTA city={city}/>}
       {tweaks.showExitPopup && <ExitPopup city={city}/>}
