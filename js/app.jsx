@@ -22,6 +22,7 @@ function App() {
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const cities = window.ARTYNC_CITIES;
   const city = cities[tweaks.city] || cities.lajeado;
+  const editMode = new URLSearchParams(location.search).get('edit') === '1';
 
   // Apply CSS var overrides from tweaks
   useEffect(() => {
@@ -77,7 +78,7 @@ function App() {
       {tweaks.showFloatingCTA && <FloatingCTA city={city}/>}
       {tweaks.showExitPopup && <ExitPopup city={city}/>}
 
-      <TweaksPanel title="Tweaks">
+      {editMode && <TweaksPanel title="Tweaks">
         <TweakSection title="Cidade (SEO regional)" hint="Cada cidade gera uma página independente com generateStaticParams() em produção.">
           <TweakSelect
             label="Cidade ativa"
@@ -111,7 +112,7 @@ function App() {
           <TweakToggle label="WhatsApp flutuante" value={tweaks.showFloatingCTA} onChange={v => setTweak('showFloatingCTA', v)}/>
           <TweakToggle label="Pop-up de saída" value={tweaks.showExitPopup} onChange={v => setTweak('showExitPopup', v)}/>
         </TweakSection>
-      </TweaksPanel>
+      </TweaksPanel>}
     </>
   );
 }

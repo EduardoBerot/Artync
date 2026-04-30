@@ -56,6 +56,8 @@ function ScrollProgress() {
 // ---------------------------------------
 function Nav({ city }) {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     let ticking = false;
     const onScroll = () => {
@@ -70,11 +72,25 @@ function Nav({ city }) {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    const onKey = e => { if (e.key === 'Escape') setOpen(false); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
+
+  const close = () => setOpen(false);
+
   return (
     <header className="site-header">
-      <nav className={scrolled ? 'nav nav--scrolled' : 'nav'} aria-label="Principal">
+      <nav className={`nav${scrolled ? ' nav--scrolled' : ''}`} aria-label="Principal">
         <div className="nav__inner">
-          <a href="#top" className="nav__logo">
+          <a href="#top" className="nav__logo" onClick={close}>
             <img src="assets/artync-logo.png" alt="Artync" />
           </a>
           <div className="nav__links">
@@ -84,12 +100,33 @@ function Nav({ city }) {
             <a href="#faq">Dúvidas</a>
           </div>
           <div className="nav__cta">
-            <a href="#contato" className="btn btn--accent btn--pulse" style={{ padding: '10px 18px', fontSize: 13 }}>
+            <a href="#contato" className="btn btn--accent btn--pulse nav__cta-btn" style={{ padding: '10px 18px', fontSize: 13 }}>
               Solicitar orçamento
             </a>
+            <button
+              className={`nav__hamburger${open ? ' nav__hamburger--open' : ''}`}
+              aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+              aria-expanded={open}
+              aria-controls="nav-drawer"
+              onClick={() => setOpen(o => !o)}
+            >
+              <span/><span/><span/>
+            </button>
           </div>
         </div>
       </nav>
+
+      {open && (
+        <div className="nav__drawer" id="nav-drawer" role="dialog" aria-label="Menu de navegação">
+          <a href="#servicos"  onClick={close}>Serviços</a>
+          <a href="#beneficios" onClick={close}>Benefícios</a>
+          <a href="#processo"  onClick={close}>Processo</a>
+          <a href="#faq"       onClick={close}>Dúvidas</a>
+          <a href="#contato" className="btn btn--accent" onClick={close} style={{ marginTop: 8, justifyContent: 'center' }}>
+            Solicitar orçamento
+          </a>
+        </div>
+      )}
     </header>
   );
 }
@@ -134,22 +171,30 @@ function Hero({ city }) {
         {/* soft glow halo */}
         <ellipse cx="780" cy="400" rx="420" ry="240" fill="url(#wispGlow)"/>
 
-        {/* fine threads — many parallel curves, like Protocol's wisp */}
-        <g filter="url(#wispBlur)" opacity=".95">
-          {Array.from({ length: 22 }).map((_, i) => {
-            const offset = i * 6 - 60;
-            const opacity = 0.18 + (Math.abs(i - 11) < 4 ? 0.55 : 0.28);
-            return (
-              <path
-                key={i}
-                d={`M -50 ${320 + offset * 0.6} Q 350 ${260 + offset} 700 ${380 + offset * 0.9} T 1300 ${500 + offset * 0.4}`}
-                stroke="url(#wispCore)"
-                strokeWidth="1"
-                fill="none"
-                opacity={opacity}
-              />
-            );
-          })}
+        {/* fine threads — pre-computed static paths (no runtime iteration) */}
+        <g filter="url(#wispBlur)" opacity=".95" stroke="url(#wispCore)" strokeWidth="1" fill="none">
+          <path opacity=".46" d="M -50 284 Q 350 200 700 326 T 1300 476"/>
+          <path opacity=".46" d="M -50 287.6 Q 350 206 700 331.4 T 1300 478.4"/>
+          <path opacity=".46" d="M -50 291.2 Q 350 212 700 336.8 T 1300 480.8"/>
+          <path opacity=".46" d="M -50 294.8 Q 350 218 700 342.2 T 1300 483.2"/>
+          <path opacity=".46" d="M -50 298.4 Q 350 224 700 347.6 T 1300 485.6"/>
+          <path opacity=".46" d="M -50 302 Q 350 230 700 353 T 1300 488"/>
+          <path opacity=".46" d="M -50 305.6 Q 350 236 700 358.4 T 1300 490.4"/>
+          <path opacity=".46" d="M -50 309.2 Q 350 242 700 363.8 T 1300 492.8"/>
+          <path opacity=".73" d="M -50 312.8 Q 350 248 700 369.2 T 1300 495.2"/>
+          <path opacity=".73" d="M -50 316.4 Q 350 254 700 374.6 T 1300 497.6"/>
+          <path opacity=".73" d="M -50 320 Q 350 260 700 380 T 1300 500"/>
+          <path opacity=".73" d="M -50 323.6 Q 350 266 700 385.4 T 1300 502.4"/>
+          <path opacity=".73" d="M -50 327.2 Q 350 272 700 390.8 T 1300 504.8"/>
+          <path opacity=".73" d="M -50 330.8 Q 350 278 700 396.2 T 1300 507.2"/>
+          <path opacity=".73" d="M -50 334.4 Q 350 284 700 401.6 T 1300 509.6"/>
+          <path opacity=".46" d="M -50 338 Q 350 290 700 407 T 1300 512"/>
+          <path opacity=".46" d="M -50 341.6 Q 350 296 700 412.4 T 1300 514.4"/>
+          <path opacity=".46" d="M -50 345.2 Q 350 302 700 417.8 T 1300 516.8"/>
+          <path opacity=".46" d="M -50 348.8 Q 350 308 700 423.2 T 1300 519.2"/>
+          <path opacity=".46" d="M -50 352.4 Q 350 314 700 428.6 T 1300 521.6"/>
+          <path opacity=".46" d="M -50 356 Q 350 320 700 434 T 1300 524"/>
+          <path opacity=".46" d="M -50 359.6 Q 350 326 700 439.4 T 1300 526.4"/>
         </g>
 
         {/* highlight bright thread */}
@@ -179,9 +224,14 @@ function Hero({ city }) {
           {city.sub} Desenvolvimento web focado em conversão, performance e SEO local — para o seu negócio aparecer onde o cliente procura.
         </p>
 
-        <a href="#contato" className="btn btn--accent btn--pulse">
-          Quero meu orçamento <Icon.arrow size={15}/>
-        </a>
+        <div className="hero__ctas">
+          <a href="#contato" className="btn btn--accent btn--pulse">
+            Quero meu orçamento <Icon.arrow size={15}/>
+          </a>
+          <a href="#processo" className="btn btn--ghost">
+            Como funciona
+          </a>
+        </div>
       </div>
 
       <a href="#servicos" className="hero__scroll hero__scroll--light">
@@ -505,6 +555,7 @@ function FAQ({ city }) {
             return (
               <div key={i} className={`faq__item ${isOpen ? 'faq__item--open' : ''}`}>
                 <button
+                  id={`faq-btn-${i}`}
                   className="faq__btn"
                   onClick={() => setOpen(isOpen ? -1 : i)}
                   aria-expanded={isOpen}
@@ -683,7 +734,7 @@ function ExitPopup({ city }) {
   return (
     <div className="exit-overlay" onClick={() => setOpen(false)}>
       <div className="exit-modal" onClick={e => e.stopPropagation()}>
-        <button className="exit-modal__close" onClick={() => setOpen(false)}><Icon.close size={14}/></button>
+        <button className="exit-modal__close" onClick={() => setOpen(false)} aria-label="Fechar"><Icon.close size={14}/></button>
         {!submitted ? (
           <>
             <span className="exit-modal__pill">Espera aí · {city.name}</span>

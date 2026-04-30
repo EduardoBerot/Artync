@@ -54,6 +54,12 @@
   position: relative;
   z-index: 1;
 }
+.hero__ctas {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
 
 .hero__title--light {
   color: var(--ink);

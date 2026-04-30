@@ -142,6 +142,23 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================
+   Page skeleton (pre-React flash prevention)
+   ============================================ */
+.page-skeleton {
+  background: #FAFBFD;
+  min-height: 100vh;
+}
+.page-skeleton__nav {
+  display: flex;
+  align-items: center;
+  padding: 18px 32px;
+  height: 62px;
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+}
+
+/* ============================================
    Site header landmark
    ============================================ */
 .site-header {
@@ -217,6 +234,49 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 6px;
 }
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+.nav__hamburger span {
+  display: block;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform .25s, opacity .2s;
+  transform-origin: center;
+}
+.nav__hamburger--open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.nav__hamburger--open span:nth-child(2) { opacity: 0; }
+.nav__hamburger--open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.nav__drawer {
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line-soft);
+  padding: 24px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav__drawer a {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-soft);
+  transition: color .2s;
+}
+.nav__drawer a:last-child { border-bottom: none; }
+.nav__drawer a:hover { color: var(--ink); }
 
 /* ============================================
    Buttons
@@ -1289,6 +1349,8 @@ a { color: inherit; text-decoration: none; }
 }
 @media (max-width: 720px) {
   .nav__links { display: none; }
+  .nav__hamburger { display: flex; }
+  .nav__cta-btn { display: none; }
   .benefits { grid-template-columns: 1fr; }
   .section { padding: 80px 0; }
   .hero { padding: 60px 0 80px; min-height: auto; }

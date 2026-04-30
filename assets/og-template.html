@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;1,9..144,700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #0B0F1A;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    position: relative;
+  }
+
+  /* Gradiente de fundo */
+  .bg-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 700px 500px at 80% 60%, rgba(97,113,238,.28) 0%, transparent 70%),
+      radial-gradient(ellipse 400px 300px at 15% 20%, rgba(97,113,238,.15) 0%, transparent 60%);
+  }
+
+  /* Grade de pontos sutil */
+  .bg-dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,.07) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* Borda superior accent */
+  .top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #6171EE, #9AA9FC, #C9CFF6);
+  }
+
+  .content {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 52px 72px 52px;
+  }
+
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-img {
+    height: 32px;
+    filter: brightness(0) invert(1);
+    opacity: .9;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 760px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(97,113,238,.18);
+    border: 1px solid rgba(97,113,238,.35);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #9AA9FC;
+    letter-spacing: .02em;
+    width: fit-content;
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    background: #6171EE;
+    border-radius: 50%;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -.02em;
+  }
+
+  h1 em {
+    font-style: italic;
+    background: linear-gradient(135deg, #9AA9FC, #6171EE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .sub {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(255,255,255,.6);
+    line-height: 1.5;
+  }
+
+  .footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .url {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255,255,255,.4);
+    letter-spacing: .01em;
+  }
+
+  .pills {
+    display: flex;
+    gap: 10px;
+  }
+
+  .pill {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,.55);
+  }
+
+  /* Elemento decorativo — círculo direito */
+  .deco-circle {
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    border: 1px solid rgba(97,113,238,.15);
+    z-index: 5;
+  }
+  .deco-circle::before {
+    content: '';
+    position: absolute;
+    inset: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(97,113,238,.1);
+  }
+  .deco-circle::after {
+    content: '';
+    position: absolute;
+    inset: 80px;
+    border-radius: 50%;
+    border: 1px solid rgba(97,113,238,.08);
+  }
+</style>
+</head>
+<body>
+  <div class="top-bar"></div>
+  <div class="bg-glow"></div>
+  <div class="bg-dots"></div>
+  <div class="deco-circle"></div>
+
+  <div class="content">
+    <div class="logo-row">
+      <img class="logo-img" src="artync-logo.png" alt="Artync">
+    </div>
+
+    <div class="main">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Desenvolvimento Web · Vale do Taquari & Vale do Rio Pardo
+      </div>
+      <h1>Sites que vendem.<br><em>Feitos para crescer.</em></h1>
+      <p class="sub">Landing pages, sites institucionais e sistemas web<br>sob medida para o seu negócio.</p>
+    </div>
+
+    <div class="footer-row">
+      <span class="url">artync.vercel.app
+      </span>
+      <div class="pills">
+        <span class="pill">SEO Local</span>
+        <span class="pill">Performance</span>
+        <span class="pill">Resultado</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

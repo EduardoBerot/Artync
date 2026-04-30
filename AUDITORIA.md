@@ -3,81 +3,24 @@
 Levantamento de falhas, bugs e oportunidades de melhoria.
 Base inicial: `main` @ `4792d90` (2026-04-27).
 
----
-
-
-## 🟠 Acessibilidade
-
-### 11. Faltam landmarks semânticos
-- Não há `<main>`, `<header>`, `<footer>` no nível raiz (apesar de `<footer>` estar no Footer interno).
-- **Correção**: envolver o conteúdo em `<main id="conteudo">`.
-
-### 12. Sem skip-link
-- Visitantes que navegam via teclado precisam tabular por toda a nav.
-- **Correção**: link `Pular para o conteúdo` que aparece no primeiro foco.
-
-### 13. FAQ sem ARIA
-- **Onde**: `js/components.jsx:521`.
-- **Problema**: o botão do acordeão não tem `aria-expanded`, `aria-controls` nem o painel `id` correspondente.
-
-### 14. Sem mobile menu
-- Em telas <720px, os links da nav apertam ou somem.
-- **Correção**: hamburger com drawer/sheet padrão.
-
-### 15. Botões só com ícone sem `aria-label` consistente
-- Verificar todos os botões/ícones na `components.jsx`.
-
----
-
-## 🟢 SEO / meta
-
-### 16. `og:image` — fallback temporário aplicado 🟡
-- **Aplicado**: `og:image` aponta para `assets/artync-logo.png` como fallback. Twitter card baixado para `summary` até existir arte dedicada.
-- **Pendente**: criar `assets/og.png` 1200×630 com identidade visual + tagline, depois reverter `twitter:card` para `summary_large_image`.
-
-### 18. Faltam arquivos básicos
-- Sem `sitemap.xml`, sem `robots.txt`.
-- Sem `theme-color`, `manifest.json`.
-- Sem `<link rel="icon">` (verificar — pode existir e eu não ter olhado).
-
----
-
-## 🔵 UX / design
-
-### 19. Hero com apenas 1 CTA
-- **Onde**: `js/components.jsx:159`.
-- Convencional ter primário (WhatsApp) + secundário ("Ver portfólio", "Como funciona") para quem ainda não está pronto.
-
-### 20. Flash branco antes do React montar
-- O usuário vê tela branca até React renderizar.
-- **Correção**: skeleton/HTML estático no `<div id="root">` para reduzir o LCP perceptual. Mitigado parcialmente pela remoção do Babel (#2), mas ainda existe um flash.
-
-### 21. SVG do hero gerado em runtime
-- **Onde**: `js/components.jsx:116` — 22 paths num `Array.from(...).map(...)`.
-- **Impacto**: bloqueia o paint inicial até o React montar.
-- **Correção**: SVG estático inline no HTML — renderiza antes do JS.
-
-### 23. Sem dark mode real
-- O tweak `heroStyle="dark"` muda só uma seção. O site inteiro continua claro.
-
----
-
-## ⚙️ Pequenas pendências
-
-- Tweaks panel está sempre visível em produção — considerar gate por query param (`?edit=1`) ou env check.
-- `JetBrains Mono` é carregada via Google Fonts (`index.html:48`) mas não vi uso óbvio em `styles.css` — verificar se vale o custo.
-
----
-
-## Roadmap sugerido (ordem de impacto)
-
-| # | Ação | Esforço | Impacto |
-|---|------|---------|---------|
-| 1 | Mobile menu + landmarks + ARIA no FAQ (#11, #13, #14) | 2h | A11y + mobile UX |
-
----
+**Auditoria concluída em 2026-04-29.**
 
 ## Histórico
+
+- **2026-04-29**
+  - `og:image` (#16): `assets/og-image.jpg` 1200×630 criado com identidade visual. `twitter:card` revertido para `summary_large_image`. Template salvo em `assets/og-template.html`.
+  - `JetBrains Mono`: uso confirmado em `.bvisual-api__row` (`styles.css:808`) — fonte justificada, item fechado.
+
+  - Flash branco (#20): `body{background:#FAFBFD}` inline no `<head>` + skeleton `.page-skeleton__nav` no `#root` com logo e altura da nav. React substitui ao montar sem flash visível.
+  - Dark mode (#23): removido da lista — descartado (alto esforço, baixo ROI).
+  - SVG hero (#21): 22 paths pré-computados como markup estático no JSX — removido `Array.from().map()` em runtime. Mover para HTML antes do `#root` exigiria reposicionamento externo sem ganho real de LCP (bottleneck é o React, não os paths).
+  - Hero 2º CTA (#19): adicionado botão secundário "Como funciona" linkando para `#processo`. Wrapper `.hero__ctas` com flexbox e `flex-wrap` para mobile.
+  - Botões ícone sem `aria-label` (#15): adicionado `aria-label="Fechar"` no botão de fechar do ExitPopup. Demais botões já tinham label ou texto visível.
+  - Landmarks semânticos + skip-link (#11, #12): já estavam implementados — `<header>`, `<main id="conteudo">`, `<footer>`, skip-link com CSS de foco. Itens fechados na auditoria.
+  - Arquivos básicos de SEO criados (#18): `sitemap.xml`, `robots.txt`, `theme-color` (#6171EE) e `<link rel="icon">` apontando para `assets/artync-icon.png`.
+  - Gate `?edit=1` implementado: TweaksPanel só renderiza quando URL tem `?edit=1`. Visitante real não vê o painel.
+  - FAQ ARIA (#13): adicionado `id={faq-btn-${i}}` no botão, fechando a referência `aria-labelledby` do painel. `aria-expanded` e `aria-controls` já existiam.
+  - Mobile menu implementado (#14): hamburger animado (3 barras → X) aparece em <720px; drawer com links + CTA; fecha no `Escape` e no clique; body scroll bloqueado quando aberto; `aria-expanded` e `aria-controls` no botão.
 
 - **2026-04-28**
   - Refatorado `useReveal()` em loop para componente `<Reveal>` (#5) — `Benefits` e `Services` agora usam wrapper declarativo ao invés de chamar hook dentro de `.map()`.
@@ -106,6 +49,8 @@ Base inicial: `main` @ `4792d90` (2026-04-27).
 
 ## Não estão na lista (intencionalmente)
 
+- Dark mode real (#23) — alto esforço, baixo ROI para landing page institucional. Descartado.
 - Reescrever em Next.js de verdade — é uma mudança grande e o spec original foi adaptado para HTML estático conscientemente.
 - Adicionar testes — sem build tool, infra de teste é complicada e ROI baixo num site institucional.
 - CMS para o conteúdo das cidades — `data.js` resolve bem para 9 cidades; só vira problema com 50+.
+
