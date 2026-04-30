@@ -147,4 +147,16 @@ O drawer de navegação abre mas não há backdrop que o usuário possa clicar p
 
 ## Histórico
 
-_(vazio — auditoria aberta em 2026-04-29)_
+- **2026-04-29**
+  - Código morto (M1–M5): removidos ~210 linhas de CSS morto (`styles.css` + `hero-light.css`) e 4 ícones sem uso (`icons.jsx`). Build passa sem erro.
+  - Deploy Vercel: criado `vercel.json` com `buildCommand` e `outputDirectory: "."` — corrige Vercel servindo `dist/` em vez da raiz.
+  - B1/Q3: `TweakSection title=` → `label=`, `hint=` removido (`app.jsx`).
+  - B2: Footer WhatsApp usa `ARTYNC_CONTACT.whatsappUrl()`; LinkedIn removido (sem URL real).
+  - B3: Skip link movido para antes da `<Nav>` — primeiro foco de teclado correto.
+  - B5: `alert()` no ExitPopup substituído por estado `formError` inline.
+  - B6: Menção a `next/image` removida do copy de benefício (`data.js`).
+  - B7: Links de Serviços no footer apontam para `#servicos`.
+  - B8: `"Söhne (sans)"` removido do `FONT_STACKS` — fonte não carregada.
+  - S2: FAQPage JSON-LD expandido de 3 para 6 perguntas (`index.html`).
+  - S3: `aggregateRating` sem fonte verificável removido; substituído por `priceRange`.
+  - S4: `og:image:width`, `og:image:height`, `og:image:type` adicionados.

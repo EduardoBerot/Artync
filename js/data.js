@@ -100,7 +100,7 @@ window.ARTYNC_BENEFITS = [
   },
   {
     title: "Performance de verdade",
-    body: "Carregamento sub-segundo, Core Web Vitals no verde e imagens otimizadas com next/image. Velocidade que converte visita em cliente.",
+    body: "Carregamento sub-segundo, Core Web Vitals no verde e imagens otimizadas. Velocidade que converte visita em cliente.",
     visual: "slider",
   },
   {

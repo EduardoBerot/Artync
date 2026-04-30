@@ -637,22 +637,21 @@ function Footer() {
         <div className="footer__col">
           <h4>Serviços</h4>
           <ul>
-            <li><a href="#beneficios">Criação de sites</a></li>
-            <li><a href="#beneficios">Landing pages</a></li>
-            <li><a href="#beneficios">Sistemas web</a></li>
+            <li><a href="#servicos">Criação de sites</a></li>
+            <li><a href="#servicos">Landing pages</a></li>
+            <li><a href="#servicos">Sistemas web</a></li>
             <li><a href="#beneficios">SEO local</a></li>
           </ul>
         </div>
         <div className="footer__col">
           <h4>Contato</h4>
           <ul>
-            <li><a href="#">WhatsApp</a></li>
+            <li><a href={window.ARTYNC_CONTACT.whatsappUrl()} target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
             <li>
               <a href="https://www.instagram.com/_artync/" target="_blank" rel="noopener noreferrer" className="footer__social">
                 <Icon.instagram size={14}/> @_artync
               </a>
             </li>
-            <li><a href="#">LinkedIn</a></li>
           </ul>
         </div>
       </div>
@@ -698,6 +697,7 @@ function ExitPopup({ city }) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState('');
+  const [formError, setFormError] = useState('');
   const shownRef = useRef(false);
 
   useEffect(() => {
@@ -745,8 +745,8 @@ function ExitPopup({ city }) {
             <form className="exit-modal__form" onSubmit={async e => {
               e.preventDefault();
               setLoading(true);
+              setFormError('');
               try {
-                // Envia para Formspree (substitua FORMSPREE_ID pelo seu ID real)
                 const formData = {
                   phone,
                   city: city.name,
@@ -761,14 +761,11 @@ function ExitPopup({ city }) {
                 });
                 if (response.ok) {
                   setSubmitted(true);
-                  // Opcional: abrir WhatsApp após envio
-                  // window.open(ARTYNC_CONTACT.whatsappUrl(city.name), '_blank');
                 } else {
-                  alert('Erro ao enviar. Tente novamente ou chame no WhatsApp.');
+                  setFormError('Erro ao enviar. Tente novamente ou chame no WhatsApp.');
                 }
-              } catch (err) {
-                console.error('ExitPopup submit error:', err);
-                alert('Erro ao enviar. Tente novamente ou chame no WhatsApp.');
+              } catch {
+                setFormError('Erro ao enviar. Tente novamente ou chame no WhatsApp.');
               } finally {
                 setLoading(false);
               }
@@ -790,6 +787,7 @@ function ExitPopup({ city }) {
                 {loading ? 'Enviando...' : 'Enviar'} <Icon.arrow size={14}/>
               </button>
             </form>
+            {formError && <p style={{ color: '#DC2626', fontSize: 13, marginTop: 8 }}>{formError}</p>}
             <p className="exit-modal__assure">
               <Icon.shield size={11}/> &nbsp;Seus dados ficam seguros. Não compartilhamos com ninguém.
             </p>

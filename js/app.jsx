@@ -15,7 +15,6 @@ const FONT_STACKS = {
   "Fraunces": "'Fraunces', Georgia, serif",
   "Instrument Serif": "'Instrument Serif', Georgia, serif",
   "DM Serif Display": "'DM Serif Display', Georgia, serif",
-  "Söhne (sans)": "'Söhne', 'Inter', system-ui, sans-serif",
 };
 
 function App() {
@@ -62,9 +61,9 @@ function App() {
 
   return (
     <>
+      <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>
       <ScrollProgress/>
       <Nav city={city}/>
-      <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>
       <main id="conteudo">
         <Hero city={city}/>
         <Services/>
@@ -79,7 +78,7 @@ function App() {
       {tweaks.showExitPopup && <ExitPopup city={city}/>}
 
       {editMode && <TweaksPanel title="Tweaks">
-        <TweakSection title="Cidade (SEO regional)" hint="Cada cidade gera uma página independente com generateStaticParams() em produção.">
+        <TweakSection label="Cidade (SEO regional)">
           <TweakSelect
             label="Cidade ativa"
             value={tweaks.city}
@@ -88,7 +87,7 @@ function App() {
           />
         </TweakSection>
 
-        <TweakSection title="Visual">
+        <TweakSection label="Visual">
           <TweakColor label="Cor de destaque" value={tweaks.accent} onChange={v => setTweak('accent', v)}/>
           <TweakSelect
             label="Fonte de display"
@@ -108,7 +107,7 @@ function App() {
           />
         </TweakSection>
 
-        <TweakSection title="Conversão">
+        <TweakSection label="Conversão">
           <TweakToggle label="WhatsApp flutuante" value={tweaks.showFloatingCTA} onChange={v => setTweak('showFloatingCTA', v)}/>
           <TweakToggle label="Pop-up de saída" value={tweaks.showExitPopup} onChange={v => setTweak('showExitPopup', v)}/>
         </TweakSection>
