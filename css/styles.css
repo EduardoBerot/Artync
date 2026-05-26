@@ -254,6 +254,8 @@ a { color: inherit; text-decoration: none; }
 .nav__hamburger--open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 .nav__drawer {
+  position: relative;
+  z-index: 50;
   background: rgba(255,255,255,.97);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line-soft);
@@ -272,6 +274,12 @@ a { color: inherit; text-decoration: none; }
 }
 .nav__drawer a:last-child { border-bottom: none; }
 .nav__drawer a:hover { color: var(--ink); }
+
+.nav__backdrop {
+  position: fixed; inset: 0; z-index: 49;
+  background: rgba(0,0,0,.3);
+  backdrop-filter: blur(2px);
+}
 
 /* ============================================
    Buttons
@@ -640,6 +648,19 @@ a { color: inherit; text-decoration: none; }
   border: 2px solid #fff;
   box-shadow: 0 2px 6px rgba(0,0,0,.06);
 }
+.bvisual-team__person--1 { background: linear-gradient(135deg, #C9CFF6, #6171EE); }
+.bvisual-team__person--2 { background: linear-gradient(135deg, #FBBF24, #F59E0B); }
+.bvisual-team__person--3 { background: linear-gradient(135deg, #34D399, #059669); }
+.bvisual-team__person--4 { background: linear-gradient(135deg, #F472B6, #BE185D); }
+
+.bvisual-scale { display: flex; align-items: center; gap: 12px; }
+.bvisual-scale__box {
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 8px; font-weight: 700;
+}
+.bvisual-scale__box--v1 { width: 40px; height: 40px; font-size: 11px; color: #3A41AE; background: #fff; border: 1px solid #DDE3FF; }
+.bvisual-scale__box--v2 { width: 56px; height: 56px; font-size: 13px; color: #fff; border-radius: 10px; background: linear-gradient(135deg, #7C8DF7, #3A41AE); }
+.bvisual-scale__box--v3 { width: 72px; height: 72px; font-size: 16px; color: #fff; border-radius: 12px; background: linear-gradient(135deg, #4B55D6, #1A1F4E); }
 
 /* ============================================
    How it works (timeline)

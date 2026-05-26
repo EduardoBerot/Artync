@@ -17,9 +17,14 @@ Landing page institucional da **Artync** (desenvolvimento web) com foco em SEO r
 Site Artync/
 ├── index.html              # Entry point — carrega dist/*.js. `?print=1` dispara window.print() automaticamente.
 ├── package.json            # Dev dep única: esbuild (build do JSX)
-├── build.mjs               # Compila js/*.jsx → dist/*.js (minificado)
+├── scripts/
+│   └── build.mjs           # Compila js/*.jsx → dist/*.js (minificado)
 ├── README.md               # Visão geral pública do projeto
-├── CLAUDE.md               # Este arquivo
+├── .claude/
+│   ├── CLAUDE.md           # Este arquivo
+│   └── AGENTS.md           # Contexto técnico para agentes como Codex
+├── docs/
+│   └── politica-de-privacidade-kontrol.html # Política pública do Kontrol
 ├── assets/                 # Imagens e logos
 ├── css/
 │   ├── styles.css          # Tokens, reset, layout, componentes globais
@@ -50,13 +55,13 @@ Site Artync/
 5. `dist/components.js` — define `window.ArtyncSite` (precisa de `Icon`)
 6. `dist/app.js` — usa `ArtyncSite` + `useTweaks` + `ARTYNC_CITIES`
 
-**Não há módulos ES** — tudo se comunica via `window.*`. Ao adicionar componentes novos, expor em `window`, carregar antes de quem consome, e adicionar a `JSX_FILES` em `build.mjs`.
+**Não há módulos ES** — tudo se comunica via `window.*`. Ao adicionar componentes novos, expor em `window`, carregar antes de quem consome, e adicionar a `JSX_FILES` em `scripts/build.mjs`.
 
 ## Painel de Tweaks (edit mode)
 
 `js/app.jsx` define `TWEAK_DEFAULTS` dentro de marcadores `/*EDITMODE-BEGIN*/...{ }.../*EDITMODE-END*/`. O host (Claude artifacts/preview) reescreve esse bloco no **source `.jsx`** quando o usuário ajusta o painel — não remover os marcadores. Após edit, é preciso rodar `npm run build` para refletir no `dist/`.
 
-Tweaks atuais: `city`, `accent` (cor), `heroStyle` (gradient/minimal/dark), `displayFont`, `showFloatingCTA`, `showExitPopup`.
+Tweaks atuais: `city`, `accent` (cor), `displayFont`, `showFloatingCTA`, `showExitPopup`.
 
 A cor de destaque deriva uma paleta (`--indigo-50` a `--indigo-700`) via função `shade()` em `app.jsx`.
 
@@ -96,9 +101,6 @@ Para gerar PDF A4: acessar `http://localhost:8000/?print=1`. Após o React monta
 
 ## Pendências / atenções
 
-- Placeholders ainda em produção:
-  - Telefone `+55 51 0000-0000` em `index.html` (JSON-LD `ProfessionalService`).
-  - CNPJ `00.000.000/0001-00` em `js/components.jsx` (Footer).
-  - E-mail `contato@artync.com.br` no Footer com `href="#"` (sem `mailto:`).
-- `og:image` (referenciado pelo JSON-LD como `https://artync.com.br/og.png`) — arquivo ainda não existe em `assets/`.
+- Conferir periodicamente se os dados de contato em `js/data.js` e `index.html` continuam atuais.
+- `docs/` deve ficar reservado para documentos publicos publicados pelo site, como a política de privacidade do Kontrol.
 - Branch atual e principal: `main`.

@@ -5,7 +5,6 @@ const { ScrollProgress, Nav, Hero, Benefits, Services, HowItWorks, FAQ, FinalCTA
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "city": "lajeado",
   "accent": "#6171EE",
-  "heroStyle": "gradient",
   "displayFont": "Fraunces",
   "showFloatingCTA": true,
   "showExitPopup": true
@@ -23,6 +22,14 @@ function App() {
   const city = cities[tweaks.city] || cities.lajeado;
   const editMode = new URLSearchParams(location.search).get('edit') === '1';
 
+  useEffect(() => {
+    if (!editMode) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Serif+Display:ital@0;1&display=swap';
+    document.head.appendChild(link);
+  }, []);
+
   // Apply CSS var overrides from tweaks
   useEffect(() => {
     const r = document.documentElement.style;
@@ -38,11 +45,6 @@ function App() {
     r.setProperty('--indigo-50', shade(tweaks.accent, 86));
     r.setProperty('--font-display', FONT_STACKS[tweaks.displayFont] || FONT_STACKS.Fraunces);
   }, [tweaks.accent, tweaks.displayFont]);
-
-  // Hero style class on body
-  useEffect(() => {
-    document.body.dataset.hero = tweaks.heroStyle;
-  }, [tweaks.heroStyle]);
 
   // Auto-print quando a URL tem ?print=1 (substitui index-print.html).
   useEffect(() => {
@@ -95,16 +97,7 @@ function App() {
             options={Object.keys(FONT_STACKS).map(k => ({ value: k, label: k }))}
             onChange={v => setTweak('displayFont', v)}
           />
-          <TweakRadio
-            label="Estilo do hero"
-            value={tweaks.heroStyle}
-            options={[
-              { value: 'gradient', label: 'Gradient' },
-              { value: 'minimal',  label: 'Minimal' },
-              { value: 'dark',     label: 'Dark' },
-            ]}
-            onChange={v => setTweak('heroStyle', v)}
-          />
+
         </TweakSection>
 
         <TweakSection label="Conversão">

@@ -80,6 +80,26 @@ function Nav({ city }) {
   }, []);
 
   useEffect(() => {
+    if (!open) return;
+    const drawer = document.getElementById('nav-drawer');
+    if (!drawer) return;
+    const focusable = Array.from(drawer.querySelectorAll('a, button'));
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    first?.focus();
+    const trap = e => {
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    document.addEventListener('keydown', trap);
+    return () => document.removeEventListener('keydown', trap);
+  }, [open]);
+
+  useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [open]);
@@ -91,7 +111,7 @@ function Nav({ city }) {
       <nav className={`nav${scrolled ? ' nav--scrolled' : ''}`} aria-label="Principal">
         <div className="nav__inner">
           <a href="#top" className="nav__logo" onClick={close}>
-            <img src="assets/artync-logo.png" alt="Artync" />
+            <img src="assets/artync-logo.png" alt="Artync" width="151" height="26"/>
           </a>
           <div className="nav__links">
             <a href="#servicos">Serviços</a>
@@ -117,15 +137,18 @@ function Nav({ city }) {
       </nav>
 
       {open && (
-        <div className="nav__drawer" id="nav-drawer" role="dialog" aria-label="Menu de navegação">
-          <a href="#servicos"  onClick={close}>Serviços</a>
-          <a href="#beneficios" onClick={close}>Benefícios</a>
-          <a href="#processo"  onClick={close}>Processo</a>
-          <a href="#faq"       onClick={close}>Dúvidas</a>
-          <a href="#contato" className="btn btn--accent" onClick={close} style={{ marginTop: 8, justifyContent: 'center' }}>
-            Solicitar orçamento
-          </a>
-        </div>
+        <>
+          <div className="nav__backdrop" onClick={close} aria-hidden="true"/>
+          <div className="nav__drawer" id="nav-drawer" role="dialog" aria-label="Menu de navegação">
+            <a href="#servicos"  onClick={close}>Serviços</a>
+            <a href="#beneficios" onClick={close}>Benefícios</a>
+            <a href="#processo"  onClick={close}>Processo</a>
+            <a href="#faq"       onClick={close}>Dúvidas</a>
+            <a href="#contato" className="btn btn--accent" onClick={close} style={{ marginTop: 8, justifyContent: 'center' }}>
+              Solicitar orçamento
+            </a>
+          </div>
+        </>
       )}
     </header>
   );
@@ -245,10 +268,10 @@ function Hero({ city }) {
 // ---------------------------------------
 // Reveal wrapper component (avoids useReveal() in .map())
 // ---------------------------------------
-function Reveal({ children, className, delay }) {
+function Reveal({ children, className, delay, style }) {
   const ref = useReveal();
   return (
-    <div ref={ref} className={`reveal ${className || ''}${delay ? ` reveal--delay-${delay}` : ''}`}>
+    <div ref={ref} className={`reveal ${className || ''}${delay ? ` reveal--delay-${delay}` : ''}`} style={style}>
       {children}
     </div>
   );
@@ -307,22 +330,23 @@ function BVisual({ kind }) {
         <div className="bvisual-team__hub">
           <img src="assets/artync-icon.png" alt="" style={{ width: '70%', height: 'auto', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', filter: 'brightness(0) invert(1)' }}/>
         </div>
-        <div className="bvisual-team__people">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} style={{ background: ['linear-gradient(135deg, #C9CFF6, #6171EE)', 'linear-gradient(135deg, #FBBF24, #F59E0B)', 'linear-gradient(135deg, #34D399, #059669)', 'linear-gradient(135deg, #F472B6, #BE185D)'][i] }}/>
-          ))}
+        <div className="bvisual-team__people" aria-hidden="true">
+          <div className="bvisual-team__person bvisual-team__person--1"/>
+          <div className="bvisual-team__person bvisual-team__person--2"/>
+          <div className="bvisual-team__person bvisual-team__person--3"/>
+          <div className="bvisual-team__person bvisual-team__person--4"/>
         </div>
       </div>
     );
   }
   if (kind === 'scale') {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <div style={{ width: 40, height: 40, borderRadius: 8, background: '#fff', border: '1px solid #DDE3FF', display: 'flex', alignItems:'center', justifyContent:'center', fontSize: 11, fontWeight: 700, color: '#3A41AE' }}>v1</div>
+      <div className="bvisual-scale">
+        <div className="bvisual-scale__box bvisual-scale__box--v1">v1</div>
         <Icon.arrow size={14}/>
-        <div style={{ width: 56, height: 56, borderRadius: 10, background: 'linear-gradient(135deg, #7C8DF7, #3A41AE)', display: 'flex', alignItems:'center', justifyContent:'center', fontSize: 13, fontWeight: 700, color: '#fff' }}>v2</div>
+        <div className="bvisual-scale__box bvisual-scale__box--v2">v2</div>
         <Icon.arrow size={14}/>
-        <div style={{ width: 72, height: 72, borderRadius: 12, background: 'linear-gradient(135deg, #4B55D6, #1A1F4E)', display: 'flex', alignItems:'center', justifyContent:'center', fontSize: 16, fontWeight: 700, color: '#fff' }}>v3</div>
+        <div className="bvisual-scale__box bvisual-scale__box--v3">v3</div>
       </div>
     );
   }
@@ -334,13 +358,13 @@ function Benefits() {
   return (
     <section className="section" id="beneficios">
       <div className="section__inner">
-        <div ref={useReveal()} className="reveal">
+        <Reveal>
           <span className="section__eyebrow">Benefícios</span>
           <h2 className="section__title">Tudo que um site profissional <em>precisa ter</em>.</h2>
           <p className="section__lede">
             Não vendemos "site bonito". Vendemos um ativo digital que ranqueia, carrega rápido e transforma visitante em cliente. Cada item abaixo já vem incluso.
           </p>
-        </div>
+        </Reveal>
         <div className="benefits">
           {benefits.map((b, i) => (
             <Reveal key={i} delay={(i % 3) + 1}>
@@ -411,13 +435,13 @@ function Services() {
   return (
     <section className="section" id="servicos">
       <div className="section__inner">
-        <div ref={useReveal()} className="reveal" style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto' }}>
+        <Reveal style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto' }}>
           <span className="section__eyebrow">Serviços</span>
           <h2 className="section__title" style={{ margin: '0 auto 18px' }}>Tudo que seu negócio precisa para <em>crescer online</em>.</h2>
           <p className="section__lede" style={{ margin: '0 auto 56px' }}>
             Escolha o formato certo para o momento da sua empresa — ou combine vários em um projeto único.
           </p>
-        </div>
+        </Reveal>
         <div className="services">
           {SERVICES.map((s, i) => (
             <Reveal key={i} delay={(i % 4) + 1}>
@@ -430,11 +454,11 @@ function Services() {
             </Reveal>
           ))}
         </div>
-        <div ref={useReveal()} className="reveal" style={{ textAlign: 'center', marginTop: 56 }}>
+        <Reveal style={{ textAlign: 'center', marginTop: 56 }}>
           <a href="#contato" className="btn btn--accent btn--pulse">
             Solicitar Orçamento <Icon.arrow size={15}/>
           </a>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -488,13 +512,13 @@ function HowItWorks() {
   return (
     <section className="section section--tinted" id="processo">
       <div className="section__inner">
-        <div ref={useReveal()} className="reveal">
+        <Reveal>
           <span className="section__eyebrow">Como funciona</span>
           <h2 className="section__title">Do briefing ao Google em <em>4 passos</em>.</h2>
           <p className="section__lede">
             Processo enxuto, sem reuniões intermináveis. Você sabe exatamente em que etapa estamos, com prazos firmes e checkpoints claros.
           </p>
-        </div>
+        </Reveal>
 
         <div className="timeline" ref={railRef}>
           <div className="timeline__rail">
@@ -534,20 +558,20 @@ function FAQ({ city }) {
     }
     return f;
   });
-  const [open, setOpen] = useState(0);
+  const [open, setOpen] = useState(-1);
   const refs = useRef([]);
   return (
     <section className="section" id="faq">
       <div className="section__inner">
-        <div ref={useReveal()} className="reveal" style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto' }}>
+        <Reveal style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto' }}>
           <span className="section__eyebrow">Dúvidas frequentes</span>
           <h2 className="section__title" style={{ margin: '0 auto 18px' }}>Perguntas que <em>todo mundo faz</em>.</h2>
           <p className="section__lede" style={{ margin: '0 auto 56px' }}>
             E que merecem resposta direta antes de qualquer reunião.
           </p>
-        </div>
+        </Reveal>
         <div className="faq" role="region" aria-labelledby="faq-title">
-          <h2 id="faq-title" className="visually-hidden">Dúvidas frequentes</h2>
+          <span id="faq-title" className="visually-hidden">Dúvidas frequentes</span>
           {faq.map((f, i) => {
             const isOpen = open === i;
             const panelId = `faq-panel-${i}`;
@@ -592,7 +616,7 @@ function FinalCTA({ city }) {
       <div className="fcta__bg"/>
       <div className="fcta__noise"/>
       <div className="fcta__inner">
-        <div ref={useReveal()} className="reveal">
+        <Reveal>
           <h2 className="fcta__title">
             Pronto para um site que<br/>
             <em>realmente trabalha</em> por você?
@@ -615,7 +639,7 @@ function FinalCTA({ city }) {
             <span><Icon.shield size={12}/> Sem compromisso</span>
             <span><Icon.bolt size={12}/> Atendimento direto</span>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -629,7 +653,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer__inner">
         <div className="footer__brand">
-          <img src="assets/artync-logo.png" alt="Artync"/>
+          <img src="assets/artync-logo.png" alt="Artync" width="163" height="28" loading="lazy"/>
           <p className="footer__tag">
             Desenvolvimento web focado em conversão para empresas do Vale do Taquari e Vale do Rio Pardo.
           </p>
@@ -669,8 +693,15 @@ function Footer() {
 function FloatingCTA({ city }) {
   const [bubble, setBubble] = useState(false);
   useEffect(() => {
-    const t = setTimeout(() => setBubble(true), 6000);
-    return () => clearTimeout(t);
+    const onScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      if (h > 0 && window.scrollY / h >= 0.3) {
+        setBubble(true);
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
   const href = window.ARTYNC_CONTACT.whatsappUrl(city && city.name);
   return (
@@ -773,6 +804,7 @@ function ExitPopup({ city }) {
               <input
                 className="exit-modal__input"
                 type="tel"
+                inputMode="tel"
                 placeholder="(51) 9 0000-0000"
                 value={phone}
                 onChange={e => setPhone(e.target.value)}

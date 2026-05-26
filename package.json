@@ -4,8 +4,8 @@
   "private": true,
   "description": "Landing institucional Artync — HTML estático + React via CDN. JSX pré-compilado por esbuild.",
   "scripts": {
-    "build": "node build.mjs",
-    "watch": "node build.mjs --watch",
+    "build": "node scripts/build.mjs",
+    "watch": "node scripts/build.mjs --watch",
     "serve": "python -m http.server 8000"
   },
   "devDependencies": {

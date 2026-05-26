@@ -1,70 +1,63 @@
-# Artync — Site Institucional
+# Artync - Site Institucional
 
-Landing page da **Artync**, especializada em desenvolvimento web focado em conversão e SEO regional para empresas do **Vale do Taquari** e **Vale do Rio Pardo** (RS).
+Landing page institucional da **Artync**, focada em conversao e SEO regional para empresas do **Vale do Taquari** e **Vale do Rio Pardo**.
 
-A cidade ativa é configurável em tempo real pelo painel de tweaks, e cada uma renderiza headline, copy e FAQ próprios — pensado para ranquear em buscas locais como "site Lajeado", "site Santa Cruz do Sul", etc.
+O site e estatico, usa React via CDN e carrega os arquivos JavaScript pre-compilados em `dist/`. A cidade ativa pode ser ajustada pelo painel de tweaks em `?edit=1`.
 
-## Tecnologias
+## Stack
 
-- **HTML estático** — sem build, sem bundler, sem `node_modules`
-- **React 18.3.1** + **ReactDOM** via CDN (unpkg)
-- **Babel Standalone** — compila JSX direto no navegador
-- **CSS puro** com design tokens via CSS variables
-- **Google Analytics** integrado
-- **Schema.org / JSON-LD** para `ProfessionalService` e `FAQPage`
+- HTML estatico servido como SPA
+- React 18.3.1 + ReactDOM via CDN
+- JSX pre-compilado por `esbuild`
+- CSS puro com design tokens em `css/styles.css`
+- Google Analytics e Schema.org/JSON-LD
 
 ## Estrutura
 
-```
-Site Artync/
-├── index.html              # Entry point principal
-├── index-print.html        # Versão otimizada para impressão A4
-├── CLAUDE.md               # Contexto técnico para sessões com IA
-├── assets/                 # Imagens e logos
+```txt
+Artync/
+├── index.html
+├── package.json
+├── README.md
+├── scripts/
+│   └── build.mjs
+├── .claude/
+│   ├── CLAUDE.md
+│   └── AGENTS.md
+├── docs/
+│   └── politica-de-privacidade-kontrol.html
+├── assets/
 ├── css/
-│   ├── styles.css          # Tokens, reset, layout, componentes
-│   ├── services.css        # Seção de serviços
-│   └── hero-light.css      # Variante "light" do hero
-└── js/
-    ├── data.js             # Cidades, benefícios, depoimentos, FAQ
-    ├── icons.jsx           # Ícones SVG inline
-    ├── tweaks-panel.jsx    # Painel de tweaks + controles
-    ├── components.jsx      # Nav, Hero, Benefits, Services, FAQ, Footer...
-    └── app.jsx             # Componente raiz <App/>
+├── js/
+└── dist/
 ```
 
-## Como rodar
+## Desenvolvimento
 
-Como tudo é estático, qualquer servidor HTTP local funciona:
+Edite os arquivos fonte em `js/` e gere os artefatos em `dist/`:
 
 ```bash
-# Python
-python -m http.server 8000
-
-# Node
-npx serve .
+npm install
+npm run build
+npm run serve
 ```
 
 Depois acesse `http://localhost:8000`.
 
-> Abrir o `index.html` direto via `file://` pode bloquear o carregamento de algumas CDNs e fontes — prefira o servidor local.
+Para modo de edicao visual, use `http://localhost:8000/?edit=1`.
+Para impressao/PDF A4, use `http://localhost:8000/?print=1`.
 
-## Cidades suportadas
+## Documentos publicos
 
-Lajeado · Santa Cruz do Sul · Arroio do Meio · Estrela · Venâncio Aires · Teutônia · Encantado · Vera Cruz · Rio Pardo
+- `docs/politica-de-privacidade-kontrol.html`: politica de privacidade publica do app Kontrol.
 
-## Funcionalidades
+## Contexto para IA
 
-- Hero com SVG animado (estilo "wisp")
-- Seção de benefícios com visuais customizados por card
-- Timeline de processo com preenchimento progressivo no scroll
-- Marquee de depoimentos
-- FAQ acordeão com resposta dinâmica por cidade
-- Botão flutuante de WhatsApp
-- Pop-up de saída (exit intent)
-- Painel de tweaks ao vivo (cor, fonte, estilo do hero, cidade ativa)
-- Versão de impressão A4
+- `.claude/CLAUDE.md`: contexto tecnico para sessoes com Claude.
+- `.claude/AGENTS.md`: contexto tecnico para agentes como Codex.
 
-## Licença
+Esses arquivos ficam em `.claude/` para nao misturar contexto interno com documentacao publica do site.
 
-Projeto proprietário — todos os direitos reservados.
+## Licenca
+
+Projeto proprietario. Todos os direitos reservados.

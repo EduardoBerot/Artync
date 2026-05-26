@@ -1,3 +1,13 @@
 node_modules/
 .DS_Store
+Thumbs.db
 *.log
+
+# Local environment/secrets
+.env
+.env.local
+.env.*.local
+
+# Local tool and deploy state
+.claude/settings.local.json
+.vercel/

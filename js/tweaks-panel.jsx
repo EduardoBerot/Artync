@@ -7,7 +7,7 @@
 // individual prototypes don't re-roll it. Ships a consistent set of controls so you
 // don't hand-draw <input type="range">, segmented radios, steppers, etc.
 //
-// Usage (in an HTML file that loads React + Babel):
+// Usage (in an HTML file that loads React + compiled dist scripts):
 //
 //   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 //     "primaryColor": "#D97757",
