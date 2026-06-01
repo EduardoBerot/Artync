@@ -1,9 +1,9 @@
 # Artync
 
-> Estudio de desenvolvimento web para empresas do Vale do Taquari, Vale do Rio
+> Estudio de solucoes digitais para empresas do Vale do Taquari, Vale do Rio
 > Pardo e outras regioes do Brasil.
 
-A Artync cria sites institucionais, landing pages, lojas virtuais e sistemas web
+A Artync cria sites institucionais, landing pages, lojas virtuais e sistemas
 sob medida para empresas do Vale do Taquari, Vale do Rio Pardo e outras regioes
 do Brasil.
 
@@ -12,7 +12,7 @@ do Brasil.
 - Sites institucionais
 - Landing pages
 - E-commerce
-- Sistemas web personalizados
+- Sistemas personalizados
 
 ## Diferenciais
 

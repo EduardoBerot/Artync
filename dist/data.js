@@ -6,7 +6,7 @@ window.ARTYNC_CITIES = {
     region: "Vale do Taquari e Vale do Rio Pardo",
     state: "RS",
     headlinePrefix: "Para empresas da",
-    sub: "Criamos sites, landing pages e sistemas web sob medida para empresas do Vale do Taquari, Vale do Rio Pardo e outras regiões do Brasil.",
+    sub: "Criamos sites, landing pages e sistemas personalizados para empresas do Vale do Taquari, Vale do Rio Pardo e outras regiões do Brasil.",
     nearby: ["Lajeado", "Santa Cruz do Sul", "Estrela"],
   },
   "lajeado": {
@@ -15,7 +15,7 @@ window.ARTYNC_CITIES = {
     region: "Vale do Taquari",
     state: "RS",
     headlinePrefix: "Para empresas de",
-    sub: "Criamos sites, landing pages e sistemas web sob medida para empresas de Lajeado e região.",
+    sub: "Criamos sites, landing pages e sistemas personalizados para empresas de Lajeado e região.",
     population: "84 mil",
     nearby: ["Estrela", "Arroio do Meio", "Cruzeiro do Sul"],
   },
@@ -55,7 +55,7 @@ window.ARTYNC_CITIES = {
     region: "Vale do Rio Pardo",
     state: "RS",
     headlinePrefix: "Para negócios locais de",
-    sub: "Tecnologia web aplicada à realidade das empresas de Venâncio Aires.",
+    sub: "Tecnologia aplicada à realidade das empresas de Venâncio Aires.",
     population: "75 mil",
     nearby: ["Santa Cruz do Sul", "Vera Cruz", "Mato Leitão"],
   },
@@ -65,7 +65,7 @@ window.ARTYNC_CITIES = {
     region: "Vale do Taquari",
     state: "RS",
     headlinePrefix: "Para empresas de",
-    sub: "Sites institucionais, lojas e sistemas web para empresas de Teutônia.",
+    sub: "Sites institucionais, lojas e sistemas personalizados para empresas de Teutônia.",
     population: "32 mil",
     nearby: ["Estrela", "Westfália", "Imigrante"],
   },
@@ -95,7 +95,7 @@ window.ARTYNC_CITIES = {
     region: "Vale do Rio Pardo",
     state: "RS",
     headlinePrefix: "Para empresas de",
-    sub: "Desenvolvimento web sob medida para empresas de Rio Pardo.",
+    sub: "Soluções digitais sob medida para empresas de Rio Pardo.",
     population: "37 mil",
     nearby: ["Santa Cruz do Sul", "Pantano Grande", "Encruzilhada do Sul"],
   },
@@ -164,7 +164,7 @@ window.ARTYNC_STEPS = [
 window.ARTYNC_FAQ = [
   {
     q: "Quanto custa um site?",
-    a: "Depende do escopo, mas trabalhamos com 3 faixas: site institucional a partir de R$ 2.800, landing page a partir de R$ 1.900 e sistemas web sob medida com orçamento personalizado. Toda proposta é fechada após o briefing.",
+    a: "Depende do escopo, mas trabalhamos com 3 faixas: site institucional a partir de R$ 2.800, landing page a partir de R$ 1.900 e sistemas personalizados sob orçamento. Toda proposta é fechada após o briefing.",
   },
   {
     q: "Vocês atendem minha cidade?",
@@ -176,7 +176,7 @@ window.ARTYNC_FAQ = [
   },
   {
     q: "Em quanto tempo o site fica pronto?",
-    a: "Landing page: 7 a 10 dias úteis. Site institucional: 3 a 4 semanas. Sistema web sob medida: a partir de 6 semanas. Tudo isso depois do briefing aprovado e do conteúdo recebido — quanto mais ágil você for, mais rápido entrega no ar.",
+    a: "Landing page: 7 a 10 dias úteis. Site institucional: 3 a 4 semanas. Sistema personalizado: a partir de 6 semanas. Tudo isso depois do briefing aprovado e do conteúdo recebido — quanto mais ágil você for, mais rápido entrega no ar.",
   },
   {
     q: "Eu consigo editar o site depois?",

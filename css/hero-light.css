@@ -65,10 +65,10 @@
   color: var(--ink);
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(48px, 6.6vw, 92px);
-  line-height: 1;
+  font-size: clamp(44px, 5.5vw, 76px);
+  line-height: 1.04;
   letter-spacing: -.04em;
-  max-width: 14ch;
+  max-width: 16ch;
   margin: 60px 0 28px;
 }
 .hero__title--light em {
@@ -92,5 +92,9 @@
   .hero__wisp { opacity: .55; width: 90%; right: -200px; }
 }
 @media (max-width: 600px) {
-  .hero__title--light { margin-top: 24px; }
+  .hero__title--light {
+    font-size: clamp(40px, 12vw, 54px);
+    line-height: 1.06;
+    margin-top: 24px;
+  }
 }

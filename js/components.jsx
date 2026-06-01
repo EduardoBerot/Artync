@@ -239,12 +239,12 @@ function Hero({ city }) {
 
       <div className="hero__inner">
         <h1 className="hero__title--light">
-          Sites pensados para criar<br/>
+          Sites que criam<br/>
           <em>experiências que ficam.</em>
         </h1>
 
         <p className="hero__sub--light">
-          {city.sub} Projetos que combinam identidade, clareza e tecnologia para tornar cada interação mais simples.
+          {city.sub} Identidade, clareza e tecnologia em cada detalhe.
         </p>
 
         <div className="hero__ctas">
@@ -565,7 +565,7 @@ function FAQ({ city }) {
       <div className="section__inner">
         <Reveal style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto' }}>
           <span className="section__eyebrow">Dúvidas frequentes</span>
-          <h2 className="section__title" style={{ margin: '0 auto 18px' }}>Perguntas que <em>todo mundo faz</em>.</h2>
+          <h2 className="section__title faq__title" style={{ margin: '0 auto 18px' }}>Perguntas que <em>todo mundo faz</em>.</h2>
           <p className="section__lede" style={{ margin: '0 auto 56px' }}>
             E que merecem resposta direta antes de qualquer reunião.
           </p>
@@ -663,7 +663,7 @@ function Footer() {
           <ul>
             <li><a href="#servicos">Criação de sites</a></li>
             <li><a href="#servicos">Landing pages</a></li>
-            <li><a href="#servicos">Sistemas web</a></li>
+            <li><a href="#servicos">Sistemas personalizados</a></li>
             <li><a href="#beneficios">Experiência digital</a></li>
           </ul>
         </div>
