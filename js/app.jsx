@@ -3,7 +3,7 @@ const { useEffect, useMemo } = React;
 const { ScrollProgress, Nav, Hero, Benefits, Services, HowItWorks, FAQ, FinalCTA, Footer, FloatingCTA, ExitPopup } = window.ArtyncSite;
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "city": "lajeado",
+  "city": "regional",
   "accent": "#6171EE",
   "displayFont": "Fraunces",
   "showFloatingCTA": true,
@@ -19,7 +19,7 @@ const FONT_STACKS = {
 function App() {
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const cities = window.ARTYNC_CITIES;
-  const city = cities[tweaks.city] || cities.lajeado;
+  const city = cities[tweaks.city] || cities.regional;
   const editMode = new URLSearchParams(location.search).get('edit') === '1';
 
   useEffect(() => {

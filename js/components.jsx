@@ -121,7 +121,7 @@ function Nav({ city }) {
           </div>
           <div className="nav__cta">
             <a href="#contato" className="btn btn--accent btn--pulse nav__cta-btn" style={{ padding: '10px 18px', fontSize: 13 }}>
-              Solicitar orçamento
+              Iniciar conversa
             </a>
             <button
               className={`nav__hamburger${open ? ' nav__hamburger--open' : ''}`}
@@ -145,7 +145,7 @@ function Nav({ city }) {
             <a href="#processo"  onClick={close}>Processo</a>
             <a href="#faq"       onClick={close}>Dúvidas</a>
             <a href="#contato" className="btn btn--accent" onClick={close} style={{ marginTop: 8, justifyContent: 'center' }}>
-              Solicitar orçamento
+              Iniciar conversa
             </a>
           </div>
         </>
@@ -239,17 +239,17 @@ function Hero({ city }) {
 
       <div className="hero__inner">
         <h1 className="hero__title--light">
-          Sites que <em>vendem.</em><br/>
-          Não que só existem.
+          Sites pensados para criar<br/>
+          <em>experiências que ficam.</em>
         </h1>
 
         <p className="hero__sub--light">
-          {city.sub} Desenvolvimento web focado em conversão, performance e SEO local — para o seu negócio aparecer onde o cliente procura.
+          {city.sub} Projetos que combinam identidade, clareza e tecnologia para tornar cada interação mais simples.
         </p>
 
         <div className="hero__ctas">
           <a href="#contato" className="btn btn--accent btn--pulse">
-            Quero meu orçamento <Icon.arrow size={15}/>
+            Conversar sobre um projeto <Icon.arrow size={15}/>
           </a>
           <a href="#processo" className="btn btn--ghost">
             Como funciona
@@ -310,7 +310,7 @@ function BVisual({ kind }) {
         <div className="bvisual-bars__bar" style={{ height: '40%' }}/>
         <div className="bvisual-bars__bar" style={{ height: '60%' }}/>
         <div className="bvisual-bars__bar" style={{ height: '85%' }}>
-          <div className="bvisual-bars__label">+312%</div>
+          <div className="bvisual-bars__label">FLUXO</div>
         </div>
       </div>
     );
@@ -320,7 +320,7 @@ function BVisual({ kind }) {
       <div className="bvisual-api">
         <div className="bvisual-api__row"><span className="bvisual-api__verb">CRM</span> <span style={{ color: '#9AA3B2' }}>lead.create</span></div>
         <div className="bvisual-api__row bvisual-api__row--active"><span className="bvisual-api__verb bvisual-api__verb--active">WPP</span> <span>contato direto</span></div>
-        <div className="bvisual-api__row"><span className="bvisual-api__verb">ADS</span> <span style={{ color: '#9AA3B2' }}>conversion</span></div>
+        <div className="bvisual-api__row"><span className="bvisual-api__verb">FORM</span> <span style={{ color: '#9AA3B2' }}>contato</span></div>
       </div>
     );
   }
@@ -360,9 +360,9 @@ function Benefits() {
       <div className="section__inner">
         <Reveal>
           <span className="section__eyebrow">Benefícios</span>
-          <h2 className="section__title">Tudo que um site profissional <em>precisa ter</em>.</h2>
+          <h2 className="section__title">Uma boa experiência está nos <em>detalhes</em>.</h2>
           <p className="section__lede">
-            Não vendemos "site bonito". Vendemos um ativo digital que ranqueia, carrega rápido e transforma visitante em cliente. Cada item abaixo já vem incluso.
+            Da primeira impressão ao carregamento de cada página, cuidamos dos pontos que tornam um produto digital agradável de usar e fácil de encontrar.
           </p>
         </Reveal>
         <div className="benefits">
@@ -391,7 +391,7 @@ function Benefits() {
 const SERVICES = [
   {
     title: "Landing Pages",
-    body: "Páginas focadas em conversão para transformar visitantes em clientes.",
+    body: "Páginas objetivas que conduzem a experiência com naturalidade até o próximo passo.",
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="3" width="18" height="18" rx="3"/>
@@ -401,7 +401,7 @@ const SERVICES = [
   },
   {
     title: "Sites Institucionais",
-    body: "Presença profissional para fortalecer sua marca e gerar confiança.",
+    body: "Uma presença digital clara, confiável e alinhada à identidade da sua empresa.",
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
         <path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/>
@@ -411,7 +411,7 @@ const SERVICES = [
   },
   {
     title: "E-commerce",
-    body: "Lojas virtuais rápidas e otimizadas para vender todos os dias.",
+    body: "Lojas virtuais rápidas e intuitivas para uma jornada de compra mais simples.",
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
         <path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 7H6"/>
@@ -421,7 +421,7 @@ const SERVICES = [
   },
   {
     title: "Sistemas Personalizados",
-    body: "Soluções sob medida para automatizar e escalar seu negócio.",
+    body: "Ferramentas sob medida para simplificar processos e conectar informações.",
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/>
@@ -437,9 +437,9 @@ function Services() {
       <div className="section__inner">
         <Reveal style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto' }}>
           <span className="section__eyebrow">Serviços</span>
-          <h2 className="section__title" style={{ margin: '0 auto 18px' }}>Tudo que seu negócio precisa para <em>crescer online</em>.</h2>
+          <h2 className="section__title" style={{ margin: '0 auto 18px' }}>Soluções digitais pensadas para <em>cada contexto</em>.</h2>
           <p className="section__lede" style={{ margin: '0 auto 56px' }}>
-            Escolha o formato certo para o momento da sua empresa — ou combine vários em um projeto único.
+            Cada projeto nasce de uma necessidade real. Escolhemos a estrutura, os recursos e a tecnologia que fazem sentido para o seu momento.
           </p>
         </Reveal>
         <div className="services">
@@ -456,7 +456,7 @@ function Services() {
         </div>
         <Reveal style={{ textAlign: 'center', marginTop: 56 }}>
           <a href="#contato" className="btn btn--accent btn--pulse">
-            Solicitar Orçamento <Icon.arrow size={15}/>
+            Conversar sobre um projeto <Icon.arrow size={15}/>
           </a>
         </Reveal>
       </div>
@@ -514,9 +514,9 @@ function HowItWorks() {
       <div className="section__inner">
         <Reveal>
           <span className="section__eyebrow">Como funciona</span>
-          <h2 className="section__title">Do briefing ao Google em <em>4 passos</em>.</h2>
+          <h2 className="section__title">Da primeira conversa à publicação em <em>4 etapas</em>.</h2>
           <p className="section__lede">
-            Processo enxuto, sem reuniões intermináveis. Você sabe exatamente em que etapa estamos, com prazos firmes e checkpoints claros.
+            Um processo próximo e organizado para transformar ideias em uma experiência digital consistente.
           </p>
         </Reveal>
 
@@ -553,8 +553,8 @@ function FAQ({ city }) {
   const baseFaq = window.ARTYNC_FAQ;
   // inject city-specific answer for "atendem minha cidade"
   const faq = baseFaq.map(f => {
-    if (f.q.includes("Vocês atendem")) {
-      return { ...f, a: `Sim — ${city.name} está dentro da nossa área de atendimento principal (${city.region}). Atendo presencialmente toda a região e também 100% online. Cidades vizinhas como ${city.nearby.join(', ')} também são atendidas com a mesma proximidade.` };
+    if (f.q.includes("Vocês atendem") && city.slug !== "regional") {
+      return { ...f, a: `Sim — ${city.name} está dentro da nossa área de atendimento (${city.region}). Os projetos podem ser conduzidos online com comunicação direta durante todas as etapas. Cidades vizinhas como ${city.nearby.join(', ')} também são atendidas.` };
     }
     return f;
   });
@@ -618,24 +618,24 @@ function FinalCTA({ city }) {
       <div className="fcta__inner">
         <Reveal>
           <h2 className="fcta__title">
-            Pronto para um site que<br/>
-            <em>realmente trabalha</em> por você?
+            Vamos criar algo que faça sentido<br/>
+            <em>para o seu negócio?</em>
           </h2>
           <p className="fcta__sub">
-            Orçamento gratuito em 24h. Conversamos pelo WhatsApp, eu entendo seu negócio em {city.name} e mando uma proposta sob medida. Sem cobrança, sem compromisso.
+            Conte um pouco sobre o que você precisa{city.slug !== "regional" ? ` em ${city.name}` : ""}. A partir dessa conversa, pensamos na melhor forma de transformar a ideia em uma experiência digital clara e bem construída.
           </p>
           <a
             className="fcta__btn"
-            href={window.ARTYNC_CONTACT.whatsappUrl(city.name)}
+            href={window.ARTYNC_CONTACT.whatsappUrl(city.slug !== "regional" ? city.name : "")}
             target="_blank"
             rel="noopener noreferrer"
           >
             <Icon.whatsapp size={18}/>
-            Quero meu orçamento agora
+            Iniciar uma conversa
             <Icon.arrow size={16}/>
           </a>
           <div className="fcta__assure">
-            <span><Icon.check size={12}/> Resposta em até 24h</span>
+            <span><Icon.check size={12}/> Projeto sob medida</span>
             <span><Icon.shield size={12}/> Sem compromisso</span>
             <span><Icon.bolt size={12}/> Atendimento direto</span>
           </div>
@@ -655,7 +655,7 @@ function Footer() {
         <div className="footer__brand">
           <img src="assets/artync-logo.png" alt="Artync" width="163" height="28" loading="lazy"/>
           <p className="footer__tag">
-            Desenvolvimento web focado em conversão para empresas do Vale do Taquari e Vale do Rio Pardo.
+            Experiências digitais desenvolvidas com clareza, cuidado e tecnologia para empresas do Vale do Taquari e Vale do Rio Pardo.
           </p>
         </div>
         <div className="footer__col">
@@ -664,7 +664,7 @@ function Footer() {
             <li><a href="#servicos">Criação de sites</a></li>
             <li><a href="#servicos">Landing pages</a></li>
             <li><a href="#servicos">Sistemas web</a></li>
-            <li><a href="#beneficios">SEO local</a></li>
+            <li><a href="#beneficios">Experiência digital</a></li>
           </ul>
         </div>
         <div className="footer__col">
@@ -703,14 +703,14 @@ function FloatingCTA({ city }) {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-  const href = window.ARTYNC_CONTACT.whatsappUrl(city && city.name);
+  const href = window.ARTYNC_CONTACT.whatsappUrl(city && city.slug !== "regional" ? city.name : "");
   return (
     <div className="fab">
       {bubble && (
         <div className="fab__bubble">
           <button className="fab__close" onClick={(e) => { e.preventDefault(); e.stopPropagation(); setBubble(false); }} aria-label="Fechar"><Icon.close size={10}/></button>
           <strong>Olá! 👋</strong>
-          Podemos te mandar um orçamento gratuito em até 24h.
+          Tem um projeto em mente? Vamos conversar.
         </div>
       )}
       <a className="fab__btn" aria-label="Falar no WhatsApp" href={href} target="_blank" rel="noopener noreferrer">
@@ -768,10 +768,10 @@ function ExitPopup({ city }) {
         <button className="exit-modal__close" onClick={() => setOpen(false)} aria-label="Fechar"><Icon.close size={14}/></button>
         {!submitted ? (
           <>
-            <span className="exit-modal__pill">Espera aí · {city.name}</span>
-            <h3 className="exit-modal__title">Antes de sair, que tal um <em>orçamento gratuito</em>?</h3>
+            <span className="exit-modal__pill">{city.slug !== "regional" ? city.name : "Vamos conversar"}</span>
+            <h3 className="exit-modal__title">Tem um <em>projeto em mente</em>?</h3>
             <p className="exit-modal__sub">
-              Deixa o WhatsApp que a gente manda uma proposta em até 24h. Sem custo, sem compromisso e direto com a nossa equipe.
+              Deixe seu WhatsApp para continuarmos a conversa com calma.
             </p>
             <form className="exit-modal__form" onSubmit={async e => {
               e.preventDefault();
@@ -816,7 +816,7 @@ function ExitPopup({ city }) {
                 style={{ padding: '14px 22px' }}
                 disabled={loading}
               >
-                {loading ? 'Enviando...' : 'Enviar'} <Icon.arrow size={14}/>
+                {loading ? 'Enviando...' : 'Quero conversar'} <Icon.arrow size={14}/>
               </button>
             </form>
             {formError && <p style={{ color: '#DC2626', fontSize: 13, marginTop: 8 }}>{formError}</p>}
@@ -830,7 +830,7 @@ function ExitPopup({ city }) {
               <Icon.check size={26}/>
             </div>
             <h3 className="exit-modal__title">Recebido! 🎉</h3>
-            <p className="exit-modal__sub">Em até 24h enviamos uma proposta sob medida pelo WhatsApp.</p>
+            <p className="exit-modal__sub">Entraremos em contato pelo WhatsApp para entender melhor o seu projeto.</p>
           </div>
         )}
       </div>

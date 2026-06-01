@@ -1,12 +1,21 @@
 // Cities config — uma cidade por slug, com headline/sub regionais.
 window.ARTYNC_CITIES = {
+  "regional": {
+    slug: "regional",
+    name: "sua região",
+    region: "Vale do Taquari e Vale do Rio Pardo",
+    state: "RS",
+    headlinePrefix: "Para empresas da",
+    sub: "Criamos sites, landing pages e sistemas web sob medida para empresas do Vale do Taquari, Vale do Rio Pardo e outras regiões do Brasil.",
+    nearby: ["Lajeado", "Santa Cruz do Sul", "Estrela"],
+  },
   "lajeado": {
     slug: "lajeado",
     name: "Lajeado",
     region: "Vale do Taquari",
     state: "RS",
     headlinePrefix: "Para empresas de",
-    sub: "Sites, landing pages e sistemas web sob medida para negócios de Lajeado que querem crescer no digital.",
+    sub: "Criamos sites, landing pages e sistemas web sob medida para empresas de Lajeado e região.",
     population: "84 mil",
     nearby: ["Estrela", "Arroio do Meio", "Cruzeiro do Sul"],
   },
@@ -16,7 +25,7 @@ window.ARTYNC_CITIES = {
     region: "Vale do Rio Pardo",
     state: "RS",
     headlinePrefix: "Para negócios locais de",
-    sub: "Desenvolvimento web profissional para empresas de Santa Cruz do Sul que querem ser encontradas no Google.",
+    sub: "Criamos experiências digitais sob medida para empresas de Santa Cruz do Sul e região.",
     population: "131 mil",
     nearby: ["Vera Cruz", "Venâncio Aires", "Rio Pardo"],
   },
@@ -26,7 +35,7 @@ window.ARTYNC_CITIES = {
     region: "Vale do Taquari",
     state: "RS",
     headlinePrefix: "Para empresas de",
-    sub: "Criamos sites e sistemas que vendem para o comércio e indústria de Arroio do Meio.",
+    sub: "Criamos sites e sistemas sob medida para o comércio e a indústria de Arroio do Meio.",
     population: "21 mil",
     nearby: ["Lajeado", "Encantado", "Estrela"],
   },
@@ -36,7 +45,7 @@ window.ARTYNC_CITIES = {
     region: "Vale do Taquari",
     state: "RS",
     headlinePrefix: "Para empresas de",
-    sub: "Sites e landing pages para empresas de Estrela que querem mais clientes vindos da internet.",
+    sub: "Sites e landing pages pensados para as necessidades das empresas de Estrela.",
     population: "33 mil",
     nearby: ["Lajeado", "Teutônia", "Cruzeiro do Sul"],
   },
@@ -76,7 +85,7 @@ window.ARTYNC_CITIES = {
     region: "Vale do Rio Pardo",
     state: "RS",
     headlinePrefix: "Para empresas de",
-    sub: "Sites profissionais para empresas de Vera Cruz que querem vender mais no Vale do Rio Pardo.",
+    sub: "Sites profissionais pensados para empresas de Vera Cruz e do Vale do Rio Pardo.",
     population: "26 mil",
     nearby: ["Santa Cruz do Sul", "Vale Verde", "Passo do Sobrado"],
   },
@@ -85,8 +94,8 @@ window.ARTYNC_CITIES = {
     name: "Rio Pardo",
     region: "Vale do Rio Pardo",
     state: "RS",
-    headlinePrefix: "Para quem quer vender mais em",
-    sub: "Desenvolvimento web orientado a resultado para empresas de Rio Pardo.",
+    headlinePrefix: "Para empresas de",
+    sub: "Desenvolvimento web sob medida para empresas de Rio Pardo.",
     population: "37 mil",
     nearby: ["Santa Cruz do Sul", "Pantano Grande", "Encruzilhada do Sul"],
   },
@@ -94,33 +103,33 @@ window.ARTYNC_CITIES = {
 
 window.ARTYNC_BENEFITS = [
   {
-    title: "Sites que aparecem no Google",
-    body: "Otimização técnica de SEO incluída em todo projeto. Schema, performance, semântica e conteúdo local pensados para ranquear desde o primeiro mês.",
+    title: "Estrutura preparada para buscadores",
+    body: "Boas práticas técnicas aplicadas desde o início para que seu site possa ser encontrado.",
     visual: "flow",
   },
   {
-    title: "Performance de verdade",
-    body: "Carregamento sub-segundo, Core Web Vitals no verde e imagens otimizadas. Velocidade que converte visita em cliente.",
+    title: "Navegação rápida e fluida",
+    body: "Páginas leves, responsivas e agradáveis em diferentes dispositivos.",
     visual: "slider",
   },
   {
-    title: "Conversão acima da média",
-    body: "Layouts validados em A/B test, CTAs com gatilhos psicológicos e copy focada em dor. Páginas convertem 3x a média do mercado.",
+    title: "Jornadas mais intuitivas",
+    body: "Informações organizadas para ajudar cada pessoa a encontrar o que procura.",
     visual: "bars",
   },
   {
-    title: "Integração com seu fluxo",
-    body: "WhatsApp, CRM, Google Ads, Meta, RD Station, e-mail marketing. Tudo conversa entre si. Lead chega já etiquetado.",
+    title: "Integrações que fazem sentido",
+    body: "WhatsApp, formulários e ferramentas conectadas ao fluxo da sua empresa.",
     visual: "api",
   },
   {
-    title: "Suporte que responde",
-    body: "Atendimento direto comigo no WhatsApp. Sem ticket, sem fila, sem chatbot. Mexeu, quebrou, ajustou — em horas, não dias.",
+    title: "Atendimento próximo",
+    body: "Comunicação direta durante o projeto e suporte após a publicação.",
     visual: "team",
   },
   {
-    title: "Código que cresce com você",
-    body: "Código moderno, tipado e modular. Quando seu negócio crescer, o site escala junto — sem precisar refazer do zero.",
+    title: "Tecnologia que acompanha o projeto",
+    body: "Código organizado para facilitar melhorias e novas possibilidades.",
     visual: "scale",
   },
 ];
@@ -128,26 +137,26 @@ window.ARTYNC_BENEFITS = [
 window.ARTYNC_STEPS = [
   {
     n: "01",
-    title: "Conversa de descoberta",
-    desc: "Entendo seu negócio, público, concorrentes e metas. 30 min de bate-papo no WhatsApp ou Meet — gratuito e sem compromisso.",
+    title: "Descoberta",
+    desc: "Entendemos seu negócio, seu público e os objetivos do projeto.",
     chips: ["Briefing", "Análise de concorrentes", "Definição de metas"],
   },
   {
     n: "02",
-    title: "Estratégia e protótipo",
-    desc: "Recebo o conteúdo, defino a arquitetura e monto um protótipo navegável. Você aprova antes de qualquer linha de código.",
+    title: "Estrutura e protótipo",
+    desc: "Organizamos o conteúdo e desenhamos a experiência antes do desenvolvimento.",
     chips: ["Wireframe", "Protótipo Figma", "Copy estratégica"],
   },
   {
     n: "03",
-    title: "Desenvolvimento e testes",
-    desc: "Codifico com foco em SEO técnico, performance e responsividade. Acompanha tudo num link de pré-visualização ao vivo.",
-    chips: ["Performance", "SEO técnico", "Preview ao vivo"],
+    title: "Desenvolvimento e refinamento",
+    desc: "Construímos, testamos e ajustamos cada detalhe em diferentes dispositivos.",
+    chips: ["Performance", "Boas práticas técnicas", "Preview ao vivo"],
   },
   {
     n: "04",
-    title: "Lançamento e crescimento",
-    desc: "Publico no ar, configuro Google Analytics, Search Console e Tag Manager. 30 dias de ajustes inclusos para afinar conversão.",
+    title: "Publicação e acompanhamento",
+    desc: "Colocamos o projeto no ar e acompanhamos os primeiros passos.",
     chips: ["Deploy", "Analytics", "Otimização contínua"],
   },
 ];
@@ -155,15 +164,15 @@ window.ARTYNC_STEPS = [
 window.ARTYNC_FAQ = [
   {
     q: "Quanto custa um site?",
-    a: "Depende do escopo, mas trabalhamos com 3 faixas: site institucional a partir de R$ 2.800, landing page de alta conversão a partir de R$ 1.900 e sistemas web sob medida com orçamento personalizado. Toda proposta é fechada após o briefing — sem letras miúdas, sem custo escondido.",
+    a: "Depende do escopo, mas trabalhamos com 3 faixas: site institucional a partir de R$ 2.800, landing page a partir de R$ 1.900 e sistemas web sob medida com orçamento personalizado. Toda proposta é fechada após o briefing.",
   },
   {
     q: "Vocês atendem minha cidade?",
-    a: "Atendemos presencialmente toda a região do Vale do Taquari e Vale do Rio Pardo (Lajeado, Estrela, Arroio do Meio, Encantado, Teutônia, Santa Cruz do Sul, Vera Cruz, Venâncio Aires, Rio Pardo e cidades vizinhas). Para outras regiões, atendemos 100% online — o resultado é o mesmo.",
+    a: "Atendemos empresas do Vale do Taquari, Vale do Rio Pardo e outras regiões do Brasil. Os projetos podem ser conduzidos online com comunicação direta durante todas as etapas.",
   },
   {
     q: "O site aparece no Google?",
-    a: "Sim. Todo projeto sai com SEO técnico configurado: meta tags, sitemap, robots, dados estruturados (Schema.org), Core Web Vitals otimizado e conteúdo pensado para palavras-chave locais. Ranqueamento começa em poucas semanas e só cresce com o tempo.",
+    a: "Todo projeto é entregue com boas práticas técnicas para buscadores: meta tags, sitemap, robots, dados estruturados (Schema.org), performance e conteúdo bem organizado. A posição nos resultados depende também do mercado, da concorrência e da evolução do conteúdo ao longo do tempo.",
   },
   {
     q: "Em quanto tempo o site fica pronto?",
@@ -175,7 +184,7 @@ window.ARTYNC_FAQ = [
   },
   {
     q: "Por que não usar Wix ou WordPress?",
-    a: "Construtores de site são ótimos para quem está começando. Mas conforme você cresce, eles travam: ficam lentos, ranqueiam mal, são difíceis de personalizar e cobram caro por extensões. Um site codificado sob medida é mais rápido, mais seguro e ranqueia melhor.",
+    a: "Construtores podem funcionar bem em alguns contextos. Um projeto sob medida oferece mais liberdade para adaptar a experiência, o desempenho e os recursos às necessidades da empresa.",
   },
 ];
 
