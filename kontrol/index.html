@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontrol — Suas finanças, sob controle</title>
+  <meta name="description" content="Contas, orçamentos, parcelas e análises inteligentes em um app rápido, bonito e seguro. Kontrol é o jeito moderno de cuidar do seu dinheiro." />
+  <meta property="og:title" content="Kontrol — Suas finanças, sob controle" />
+  <meta property="og:description" content="O app de finanças pessoais com análises inteligentes, orçamentos por categoria e gamificação que cria hábito." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="assets/Kontrol.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#top" aria-label="Kontrol — início">
+        <svg width="32" height="32" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect width="64" height="64" rx="17" fill="#3561E3"/>
+          <path d="M22 17h7v13.2L41.5 17h8.8L36.9 32l13.8 15h-9L29 33.6V47h-7V17z" fill="#fff"/>
+        </svg>
+        <span>Kontrol</span>
+      </a>
+      <div class="nav-links">
+        <a href="#recursos">Recursos</a>
+        <a href="#analises">Análises</a>
+        <a href="#dominio">Domínio</a>
+        <a href="#seguranca">Segurança</a>
+      </div>
+      <!-- TODO: trocar pelo link real da Play Store -->
+      <a class="btn btn-sm btn-accent" href="#download">Baixar app</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero" id="top">
+    <div class="hero-sticky">
+    <canvas id="bg3d" aria-hidden="true"></canvas>
+    <div class="hero-glow" aria-hidden="true"></div>
+
+    <div class="hero-content" id="heroContent">
+      <div class="eyebrow"><span class="dot"></span> Controle financeiro pessoal</div>
+      <h1>Suas finanças,<br /><span class="grad">sob controle.</span></h1>
+      <p class="hero-sub">
+        Contas, orçamentos, parcelas e análises inteligentes em um app rápido,
+        bonito e seguro. O Kontrol transforma o registro de gastos em hábito —
+        e o hábito em liberdade.
+      </p>
+      <div class="hero-ctas">
+        <!-- TODO: trocar href pelo link real da Play Store -->
+        <a class="btn btn-play" href="#" aria-label="Baixar na Google Play">
+          <svg width="22" height="24" viewBox="0 0 24 26" fill="none" aria-hidden="true">
+            <path d="M1.5 1.6c-.4.4-.6 1-.6 1.8v19.2c0 .8.2 1.4.6 1.8l.1.1L13 13.1v-.3L1.6 1.5l-.1.1z" fill="#3DDC84"/>
+            <path d="M17 17.1l-4-4v-.3l4-4 .1.1 4.7 2.7c1.3.8 1.3 2 0 2.8L17.1 17l-.1.1z" fill="#FFC107"/>
+            <path d="M17.1 17L13 12.9 1.5 24.4c.4.5 1.2.5 2 0L17.1 17z" fill="#F44336"/>
+            <path d="M17.1 8.9L3.5 1.2c-.8-.5-1.6-.4-2 .1L13 12.9l4.1-4z" fill="#2196F3"/>
+          </svg>
+          <span><small>Em breve na</small>Google Play</span>
+        </a>
+        <a class="btn btn-ghost" href="#recursos">Conhecer recursos</a>
+      </div>
+    </div>
+
+    <!-- Mockup 3D -->
+    <div class="phone-stage" id="phoneStage">
+      <div class="phone-tilt" id="phoneTilt">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="screen">
+            <!-- Header (réplica de src/components/Header) -->
+            <div class="app-header">
+              <div class="app-user">
+                <div class="app-avatar">E</div>
+                <div>
+                  <span class="app-greet">Boa tarde,</span>
+                  <strong class="app-name">Eduardo</strong>
+                  <span class="app-dominio">
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="#F97316"><path d="M12 2l8 3.5V11c0 5-3.4 8.7-8 11-4.6-2.3-8-6-8-11V5.5L12 2z"/></svg>
+                    12 dias
+                  </span>
+                </div>
+              </div>
+              <div class="app-hbtns">
+                <div class="app-hbtn">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1A1A2E" stroke-width="2" stroke-linecap="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+                  <i class="app-badge">2</i>
+                </div>
+                <div class="app-hbtn">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1A1A2E" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- AmountCard (réplica de src/components/AmountCard) -->
+            <div class="am-card">
+              <div class="am-top">
+                <div>
+                  <div class="am-label">SALDO TOTAL
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </div>
+                  <div class="am-value">R$ 4.852,90</div>
+                </div>
+                <div class="am-right">
+                  <span class="am-pill">Junho
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="#1A1A2E"><path d="M7 10l5 5 5-5z"/></svg>
+                  </span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2" stroke-linecap="round"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                </div>
+              </div>
+              <div class="am-boxes">
+                <div class="am-box">
+                  <span class="am-box-label">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 17 9 10 13 14 22 5"/><polyline points="16 5 22 5 22 11"/></svg>
+                    RECEITAS
+                  </span>
+                  <b class="pos">R$ 6.200,00</b>
+                </div>
+                <div class="am-box">
+                  <span class="am-box-label">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 7 9 14 13 10 22 19"/><polyline points="16 19 22 19 22 13"/></svg>
+                    DESPESAS
+                  </span>
+                  <b class="neg">R$ 1.347,10</b>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card de notificação (insight) -->
+            <div class="app-insight">
+              <i class="app-insight-ic">!</i>
+              <div>
+                <span>AVISO</span>
+                <p>Você já atingiu 82% do seu orçamento em Alimentação.</p>
+              </div>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.4" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
+            </div>
+
+            <!-- Ações rápidas -->
+            <div class="app-title">Ações rápidas</div>
+            <div class="app-actions">
+              <div class="app-action">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="14" rx="3"/><path d="M2 10h20M16 15h2"/></svg>
+                <span>Contas</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2.2" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
+              </div>
+              <div class="app-action">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
+                <span>Categorias</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2.2" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
+              </div>
+              <div class="app-action">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 4 21 8 17 12"/><path d="M21 8H7"/><polyline points="7 12 3 16 7 20"/><path d="M3 16h14"/></svg>
+                <span>Transações</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2.2" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
+              </div>
+              <div class="app-action">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+                <span>Perfil</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2.2" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
+              </div>
+            </div>
+
+            <!-- Análises de finanças -->
+            <div class="app-title app-title-row">
+              Análises de finanças
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
+
+            <!-- BudgetCard expandido -->
+            <div class="app-card">
+              <div class="app-card-head">
+                <span>Orçamentos</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2.2" stroke-linecap="round"><polyline points="6 15 12 9 18 15"/></svg>
+              </div>
+              <div class="app-budget-list">
+                <div class="app-budget">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2" stroke-linecap="round"><path d="M7 2v9M4 2v4a3 3 0 0 0 6 0V2M17 2c-2 2-2.5 5-2.5 8H17v12"/><path d="M7 11v11"/></svg>
+                  <div>
+                    <div class="ab-top"><span>Alimentação</span><b style="color:#ef4444">82%</b></div>
+                    <div class="ab-bar"><i style="width:82%;background:#ef4444"></i></div>
+                    <small>R$ 656,00 de R$ 800,00</small>
+                  </div>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#E5E7EB" stroke-width="2.4" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
+                </div>
+                <div class="app-budget">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l1.5-5A2 2 0 0 1 8.4 9.5h7.2a2 2 0 0 1 1.9 1.5L19 16M5 16h14M5 16v3M19 16v3"/><circle cx="8" cy="19" r="1"/><circle cx="16" cy="19" r="1"/></svg>
+                  <div>
+                    <div class="ab-top"><span>Lazer</span><b style="color:#eab308">65%</b></div>
+                    <div class="ab-bar"><i style="width:65%;background:#eab308"></i></div>
+                    <small>R$ 130,00 de R$ 200,00 (10% das receitas)</small>
+                  </div>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#E5E7EB" stroke-width="2.4" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
+                </div>
+                <div class="app-budget">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                  <div>
+                    <div class="ab-top"><span>Transporte</span><b style="color:#22c55e">46%</b></div>
+                    <div class="ab-bar"><i style="width:46%;background:#22c55e"></i></div>
+                    <small>R$ 138,00 de R$ 300,00</small>
+                  </div>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#E5E7EB" stroke-width="2.4" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card seguinte recolhido -->
+            <div class="app-card app-card-collapsed">
+              <div class="app-card-head">
+                <span>Despesas por categoria</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+
+            <!-- FAB pill (réplica de src/components/Fab) -->
+            <div class="app-fab">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2.2" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#82899B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 4 21 8 17 12"/><path d="M21 8H7"/><polyline points="7 12 3 16 7 20"/><path d="M3 16h14"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cards satélites flutuantes -->
+        <div class="sat sat-1">
+          <i class="sat-ic warn">!</i>
+          <div><strong>Orçamento em 82%</strong><span>Alimentação está quase no limite</span></div>
+        </div>
+        <div class="sat sat-2">
+          <img src="assets/badges/reinado_3.png" alt="" width="34" height="34" />
+          <div><strong>12 dias de Domínio</strong><span>Sequência ativa 🔥</span></div>
+        </div>
+        <div class="sat sat-3">
+          <i class="sat-ic ok">↑</i>
+          <div><strong>+ R$ 6.200,00</strong><span>Salário recebido</span></div>
+        </div>
+        <div class="sat sat-4">
+          <svg viewBox="0 0 42 42" width="38" height="38" aria-hidden="true">
+            <circle cx="21" cy="21" r="16" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="5"/>
+            <circle cx="21" cy="21" r="16" fill="none" stroke="#22C55E" stroke-width="5" stroke-linecap="round" stroke-dasharray="68 100" transform="rotate(-90 21 21)"/>
+            <text x="21" y="25" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">68%</text>
+          </svg>
+          <div><strong>Meta de economia</strong><span>R$ 680 de R$ 1.000</span></div>
+        </div>
+      </div>
+    </div>
+
+    <a class="scroll-hint" id="scrollHint" href="#stats" aria-label="Rolar para baixo"><span></span></a>
+    </div>
+  </header>
+
+  <!-- ============ STATS ============ -->
+  <section class="stats" id="stats">
+    <div class="container stats-grid">
+      <div class="stat reveal"><strong><span class="count" data-to="8">0</span></strong><span>cards de análise inteligente</span></div>
+      <div class="stat reveal"><strong><span class="count" data-to="12">0</span></strong><span>insígnias para conquistar</span></div>
+      <div class="stat reveal"><strong><span class="count" data-to="13">0</span>+</strong><span>bancos brasileiros com logo</span></div>
+      <div class="stat reveal"><strong><span class="count" data-to="5">0</span>s</strong><span>para registrar um gasto</span></div>
+    </div>
+  </section>
+
+  <!-- ============ RECURSOS (BENTO) ============ -->
+  <section class="section" id="recursos">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="tag">Recursos</span>
+        <h2>Tudo que o seu dinheiro precisa.<br /><span class="grad">Nada do que ele não precisa.</span></h2>
+        <p>Sem planilhas, sem fricção. Cada recurso do Kontrol existe para responder uma pergunta: <em>para onde está indo o meu dinheiro?</em></p>
+      </div>
+
+      <div class="bento">
+        <article class="bento-card span-2 reveal">
+          <div class="bento-body">
+            <h3>Todas as suas contas, um saldo só</h3>
+            <p>Cadastre contas e cartões dos principais bancos do Brasil. O saldo é sempre reconstruído a partir das transações — sem número fantasma.</p>
+          </div>
+          <div class="bank-orbit" aria-hidden="true">
+            <img src="assets/banks/nubank.png" alt="Nubank" />
+            <img src="assets/banks/itau.png" alt="Itaú" />
+            <img src="assets/banks/bradesco.png" alt="Bradesco" />
+            <img src="assets/banks/c6.png" alt="C6 Bank" />
+            <img src="assets/banks/santander.png" alt="Santander" />
+            <img src="assets/banks/mercadopago.png" alt="Mercado Pago" />
+            <img src="assets/banks/caixa.png" alt="Caixa" />
+            <img src="assets/banks/picpay.png" alt="PicPay" />
+          </div>
+        </article>
+
+        <article class="bento-card reveal">
+          <div class="bento-body">
+            <h3>Orçamentos que se adaptam</h3>
+            <p>Valor fixo em reais ou percentual da sua renda — cada categoria do seu jeito.</p>
+          </div>
+          <div class="budget-demo" aria-hidden="true">
+            <div class="bd-row"><span>Alimentação</span><div class="bd-bar"><i style="width:82%;background:#F59E0B"></i></div><b>82%</b></div>
+            <div class="bd-row"><span>Transporte</span><div class="bd-bar"><i style="width:46%;background:#3B82F6"></i></div><b>46%</b></div>
+            <div class="bd-row"><span>Lazer</span><div class="bd-bar"><i style="width:104%;background:#EF4444"></i></div><b>104%</b></div>
+          </div>
+        </article>
+
+        <article class="bento-card reveal">
+          <div class="bento-body">
+            <h3>Parcelas sob vigilância</h3>
+            <p>Compras parceladas agrupadas e o comprometimento dos próximos 6 meses em barras.</p>
+          </div>
+          <div class="bars-demo" aria-hidden="true">
+            <i style="height:62%"></i><i style="height:48%"></i><i style="height:38%"></i><i style="height:30%"></i><i style="height:18%"></i><i style="height:10%"></i>
+          </div>
+        </article>
+
+        <article class="bento-card reveal">
+          <div class="bento-body">
+            <h3>Relatório mensal em PDF</h3>
+            <p>Stats, taxa de poupança, maiores gastos e alertas — exportados em um toque.</p>
+          </div>
+          <div class="pdf-demo" aria-hidden="true">
+            <div class="pdf-sheet">
+              <i class="pdf-head"></i><i></i><i></i><i class="short"></i>
+            </div>
+          </div>
+        </article>
+
+        <article class="bento-card reveal">
+          <div class="bento-body">
+            <h3>Cartão de crédito sob controle</h3>
+            <p>Limite, fechamento e vencimento da fatura — pagamento registrado em um toque.</p>
+          </div>
+          <div class="cc-demo" aria-hidden="true">
+            <div class="cc-card">
+              <div class="cc-top"><span>Cartão de crédito</span><b>•••• 4852</b></div>
+              <div class="cc-bottom">
+                <div><small>Fecha dia</small><b>28</b></div>
+                <div><small>Vence dia</small><b>05</b></div>
+                <div><small>Limite</small><b>R$ 3.500</b></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="bento-card span-2 reveal">
+          <div class="bento-body">
+            <h3>Widget na home, registro instantâneo</h3>
+            <p>Saldo sempre à vista (com botão de privacidade) e transação rápida sem nem abrir o app. Dark mode em tudo, claro.</p>
+          </div>
+          <div class="widget-demo" aria-hidden="true">
+            <div class="w-mock">
+              <div class="w-top"><span>SALDO TOTAL <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#8E96B8" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span><b>R$ 4.852,90</b></div>
+              <div class="w-actions"><i>+</i><i>⌂</i></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="bento-card reveal">
+          <div class="bento-body">
+            <h3>Insights que avisam antes</h3>
+            <p>Orçamento estourando, limite chegando, gasto caindo — o Kontrol te conta primeiro.</p>
+          </div>
+          <div class="insight-demo" aria-hidden="true">
+            <div class="mini-insight warn"><i>!</i><span>Alimentação atingiu 82% do orçamento</span></div>
+            <div class="mini-insight ok"><i>↓</i><span>Você gastou 23% menos em Lazer</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ANÁLISES ============ -->
+  <section class="section section-alt" id="analises">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="tag">Análises</span>
+        <h2>8 lentes sobre o mesmo dinheiro.</h2>
+        <p>Você escolhe quais ver, em que ordem, em lista ou carrossel. O Kontrol calcula, compara e te avisa antes do estrago.</p>
+      </div>
+
+      <div class="analysis-grid">
+        <div class="a-card reveal">
+          <svg viewBox="0 0 42 42" class="a-donut" aria-hidden="true">
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="7"/>
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#3B82F6" stroke-width="7" stroke-dasharray="40 60" stroke-dashoffset="25"/>
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#22C55E" stroke-width="7" stroke-dasharray="25 75" stroke-dashoffset="85"/>
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#F59E0B" stroke-width="7" stroke-dasharray="20 80" stroke-dashoffset="60"/>
+          </svg>
+          <h4>Despesas por categoria</h4>
+          <p>Donut interativo com legenda clicável que filtra as transações.</p>
+        </div>
+
+        <div class="a-card reveal">
+          <svg viewBox="0 0 120 60" class="a-line" aria-hidden="true">
+            <polyline points="0,48 20,42 40,46 60,30 80,34 100,18 120,22" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"/>
+            <polyline points="0,52 20,50 40,40 60,44 80,28 100,32 120,36" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <h4>Comparativo mensal</h4>
+          <p>Receitas vs. despesas dos últimos 6 meses, com variação percentual.</p>
+        </div>
+
+        <div class="a-card reveal">
+          <div class="a-rate" aria-hidden="true"><b>23%</b><div class="a-rate-bar"><i style="width:23%"></i></div></div>
+          <h4>Taxa de poupança</h4>
+          <p>Quanto da sua renda sobrou, mês a mês, com histórico de evolução.</p>
+        </div>
+
+        <div class="a-card reveal">
+          <svg viewBox="0 0 120 60" class="a-line" aria-hidden="true">
+            <polyline points="0,55 17,50 34,52 51,38 68,42 85,25 102,30 120,12" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="120" cy="12" r="3.5" fill="#3B82F6"/>
+          </svg>
+          <h4>Gastos por dia</h4>
+          <p>A curva do mês em tempo real — picos de gasto ficam evidentes.</p>
+        </div>
+      </div>
+
+      <div class="chips reveal">
+        <span class="chip">Orçamentos</span>
+        <span class="chip">Meta de economia</span>
+        <span class="chip">Parcelas em aberto</span>
+        <span class="chip">Comprometimento futuro</span>
+        <span class="chip chip-plus">modo lista ou carrossel ✦</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOMÍNIO ============ -->
+  <section class="section" id="dominio">
+    <div class="container dominio-wrap">
+      <div class="dominio-text reveal">
+        <span class="tag">Domínio</span>
+        <h2>Constância vira <span class="grad">conquista.</span></h2>
+        <p>Registre pelo menos uma transação por dia e construa sua sequência de Domínio. O Kontrol te lembra às 20h se o dia ainda está em aberto — e premia sua disciplina com insígnias.</p>
+        <ul class="check-list">
+          <li>Sequência diária com lembrete inteligente</li>
+          <li>4 categorias de insígnia, 3 níveis cada</li>
+          <li>Progresso visível no seu perfil</li>
+        </ul>
+      </div>
+      <div class="dominio-visual reveal">
+        <div class="streak-pill"><span class="flame">🔥</span><b><span class="count" data-to="30">0</span> dias</b><span>de Domínio</span></div>
+        <div class="badges-row">
+          <figure><img src="assets/badges/reinado_3.png" alt="Insígnia Reinado nível 3" /><figcaption>Reinado</figcaption></figure>
+          <figure><img src="assets/badges/maofechada_3.png" alt="Insígnia Mão Fechada nível 3" /><figcaption>Mão Fechada</figcaption></figure>
+          <figure><img src="assets/badges/registro_3.png" alt="Insígnia Registro nível 3" /><figcaption>Registro</figcaption></figure>
+          <figure><img src="assets/badges/planejador_3.png" alt="Insígnia Planejador nível 3" /><figcaption>Planejador</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SEGURANÇA ============ -->
+  <section class="section section-alt" id="seguranca">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="tag">Segurança</span>
+        <h2>Seus dados são só seus.</h2>
+        <p>Infraestrutura séria, sem letras miúdas.</p>
+      </div>
+      <div class="sec-grid">
+        <div class="sec-card reveal">
+          <i class="sec-ic">🔒</i>
+          <h4>Isolamento por usuário</h4>
+          <p>Banco PostgreSQL com Row Level Security: cada usuário só acessa os próprios dados, garantido no nível do banco.</p>
+        </div>
+        <div class="sec-card reveal">
+          <i class="sec-ic">🇧🇷</i>
+          <h4>Servidores em São Paulo</h4>
+          <p>Dados hospedados no Brasil (região sa-east-1), com autenticação segura por e-mail ou Google.</p>
+        </div>
+        <div class="sec-card reveal">
+          <i class="sec-ic">🗑️</i>
+          <h4>Exclusão total, quando quiser</h4>
+          <p>Um toque apaga tudo: transações, contas, categorias, avatar e a própria conta. Sem rastros, sem pegadinha.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section class="section" id="download">
+    <div class="container">
+      <div class="cta-panel reveal">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <svg width="56" height="56" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect width="64" height="64" rx="17" fill="#fff" fill-opacity=".12"/>
+          <path d="M22 17h7v13.2L41.5 17h8.8L36.9 32l13.8 15h-9L29 33.6V47h-7V17z" fill="#fff"/>
+        </svg>
+        <h2>Comece a controlar hoje.</h2>
+        <p>Grátis. Leve. Feito para o seu bolso — nos dois sentidos.</p>
+        <!-- TODO: trocar href pelo link real da Play Store -->
+        <a class="btn btn-play btn-play-light" href="#" aria-label="Baixar na Google Play">
+          <svg width="22" height="24" viewBox="0 0 24 26" fill="none" aria-hidden="true">
+            <path d="M1.5 1.6c-.4.4-.6 1-.6 1.8v19.2c0 .8.2 1.4.6 1.8l.1.1L13 13.1v-.3L1.6 1.5l-.1.1z" fill="#3DDC84"/>
+            <path d="M17 17.1l-4-4v-.3l4-4 .1.1 4.7 2.7c1.3.8 1.3 2 0 2.8L17.1 17l-.1.1z" fill="#FFC107"/>
+            <path d="M17.1 17L13 12.9 1.5 24.4c.4.5 1.2.5 2 0L17.1 17z" fill="#F44336"/>
+            <path d="M17.1 8.9L3.5 1.2c-.8-.5-1.6-.4-2 .1L13 12.9l4.1-4z" fill="#2196F3"/>
+          </svg>
+          <span><small>Em breve na</small>Google Play</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a class="nav-logo" href="#top">
+        <svg width="26" height="26" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect width="64" height="64" rx="17" fill="#3561E3"/>
+          <path d="M22 17h7v13.2L41.5 17h8.8L36.9 32l13.8 15h-9L29 33.6V47h-7V17z" fill="#fff"/>
+        </svg>
+        <span>Kontrol</span>
+      </a>
+      <div class="footer-links">
+        <a href="#recursos">Recursos</a>
+        <a href="#analises">Análises</a>
+        <a href="#dominio">Domínio</a>
+        <a href="#seguranca">Segurança</a>
+      </div>
+      <span class="footer-copy">© 2026 Kontrol. Feito no Brasil.</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script type="module" src="js/scene.js"></script>
+</body>
+</html>
