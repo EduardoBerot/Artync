@@ -931,7 +931,8 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 580px) {
   .bento { grid-template-columns: 1fr; }
-  .span-2 { grid-column: span 1; }
+  .span-2,
+  .bento-card:last-child { grid-column: span 1; }
   .analysis-grid { grid-template-columns: 1fr; }
   .phone { width: 280px; height: 612px; }
   .hero { height: 300vh; height: 300svh; }
